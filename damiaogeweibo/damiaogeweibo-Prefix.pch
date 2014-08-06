@@ -5,7 +5,7 @@
 //
 
 #import <Availability.h>
-
+#import "WeiboSDK.h"
 #ifndef __IPHONE_5_0
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
@@ -14,3 +14,18 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define kAppKey @"2929767500"
+#define kAppSecret @"1d76e2a6993cd17fdb556569cd3fd447"
+#define kRedirectURI @"https://api.weibo.com/oauth2/default.html"
+
+
+//#define kAppKey         @"2045436852"
+//#define kRedirectURI    @"http://www.sina.com"
+
+
+// 判断是否为iPhone5
+#define iPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
+
+#import "UIImage+image.h"
+#import "NSString+file.h"

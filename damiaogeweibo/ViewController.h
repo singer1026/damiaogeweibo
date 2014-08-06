@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+- (IBAction)login:(id)sender;
 
+- (IBAction)loadData:(id)sender;
+- (IBAction)sendWeibo:(id)sender;
 @end
