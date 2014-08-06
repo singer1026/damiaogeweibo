@@ -23,7 +23,5 @@
         name = [name filenameAppend:@"-568h@2x"];
     }
     return [UIImage imageNamed:name];
-    NSLog(@"name--->%@",name);
-    return[UIImage imageNamed:name];
 }
 @end
