@@ -37,10 +37,6 @@
         
         
     }
-    
-//    NewFeatureViewController *newVC = [[NewFeatureViewController alloc]init];
-//    //newVC.view.backgroundColor = [UIColor blueColor];
-//    self.window.rootViewController = newVC ;
 
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:kAppKey];
