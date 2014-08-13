@@ -9,6 +9,10 @@
 #import "Dock.h"
 #import "NSString+file.h"
 #import "DockItem.h"
+@interface Dock(){
+    DockItem *_currentItem;
+}
+@end
 @implementation Dock
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,9 +36,32 @@
 }
 
 -(void) itemClick:(DockItem *) item{
+    _currentItem.selected = NO;
+   
     item.selected  = YES;
     
+     _currentItem = item;
+    
+    if (_itemClickBlock) {
+        _itemClickBlock(item.tag);
+    }
+    
 }
+-(void)setSelectedIndex:(int)selectedIndex{
+    
+    if (selectedIndex<0 || selectedIndex>=self.subviews.count) {
+        return ;
+    }else{
+        _selectedIndex = selectedIndex;
+        
+        DockItem *dockItem = self.subviews[selectedIndex];
+        
+        [self itemClick:dockItem];
+        
+        
+    }
+}
+
 -(void)adjustDockItemsFrame{
     int count  =  self.subviews.count;
     CGFloat itemWidth = self.frame.size.width/count;
@@ -42,7 +69,13 @@
     
     for (int i = 0; i<count; i++) {
         DockItem *btn = self.subviews[i];
+        
         [btn setFrame:CGRectMake(i*itemWidth, 0, itemWidth, itemHeight)];
+        if (i==0) {
+            btn.selected = YES;
+            _currentItem = btn;
+        }
+        btn.tag = i;
     }
 }
 /*

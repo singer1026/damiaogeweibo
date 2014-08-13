@@ -36,6 +36,11 @@
     [dock addDockItemWithIcon:@"tabbar_discover.png" title:@"广场"];
     [dock addDockItemWithIcon:@"tabbar_more.png" title:@"更多"];
     
+    //监听dockItem的点击
+    dock.itemClickBlock = ^(int index){
+        MyLog(@"index:%d",index);
+    };
+    
     
 }
 

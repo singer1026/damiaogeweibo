@@ -10,4 +10,8 @@
 
 @interface Dock : UIView
 -(void) addDockItemWithIcon:(NSString *) icon title:(NSString *)title;
+
+@property(nonatomic,copy) void (^itemClickBlock)(int index);
+
+@property(nonatomic,assign) int selectedIndex;
 @end
