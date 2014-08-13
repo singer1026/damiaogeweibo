@@ -18,10 +18,15 @@
         [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
         self.adjustsImageWhenHighlighted  = NO;
+        
+        [self setBackgroundImage:[UIImage imageNamed:@"tabbar_slider.png"] forState:UIControlStateSelected];
     }
     return self;
 }
 
+-(void)setHighlighted:(BOOL)highlighted{
+    
+}
 #pragma mark 返回按钮内部titlelabel的边框
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
     return CGRectMake(0, contentRect.size.height*kImageRatio-5, contentRect.size.width, contentRect.size.height-contentRect.size.height*kImageRatio);

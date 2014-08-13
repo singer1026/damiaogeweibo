@@ -26,11 +26,15 @@
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:[icon filenameAppend:@"_selected"]] forState:UIControlStateSelected];
-    
+    [btn addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchDown];
     //调整dock上的按钮
     [self adjustDockItemsFrame];
 }
 
+-(void) itemClick:(DockItem *) item{
+    item.selected  = YES;
+    
+}
 -(void)adjustDockItemsFrame{
     int count  =  self.subviews.count;
     CGFloat itemWidth = self.frame.size.width/count;
