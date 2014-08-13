@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		46245826199261C30024E55C /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 46245825199261C30024E55C /* NSString+file.m */; };
+		465EA413199B9DCA00632812 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 465EA412199B9DCA00632812 /* DockItem.m */; };
 		4689F69A1991009F0015DA41 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4689F68A1991009F0015DA41 /* MJRefresh.bundle */; };
 		4689F69B1991009F0015DA41 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689F68D1991009F0015DA41 /* MJRefreshBaseView.m */; };
 		4689F69C1991009F0015DA41 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689F68F1991009F0015DA41 /* MJRefreshConst.m */; };
@@ -144,6 +145,8 @@
 /* Begin PBXFileReference section */
 		46245824199261C30024E55C /* NSString+file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+file.h"; sourceTree = "<group>"; };
 		46245825199261C30024E55C /* NSString+file.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+file.m"; sourceTree = "<group>"; };
+		465EA411199B9DCA00632812 /* DockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockItem.h; sourceTree = "<group>"; };
+		465EA412199B9DCA00632812 /* DockItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockItem.m; sourceTree = "<group>"; };
 		4689F68A1991009F0015DA41 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		4689F68B1991009F0015DA41 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		4689F68C1991009F0015DA41 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -506,6 +509,8 @@
 			children = (
 				468CF1E11992781A00BA62A4 /* Dock.h */,
 				468CF1E21992781A00BA62A4 /* Dock.m */,
+				465EA411199B9DCA00632812 /* DockItem.h */,
+				465EA412199B9DCA00632812 /* DockItem.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				4689F6CF199100A80015DA41 /* UIImage+MultiFormat.m in Sources */,
 				4689F6D0199100A80015DA41 /* UIImage+WebP.m in Sources */,
 				46CEC478198FAF070084DA0E /* libWeiboSDK.a in Sources */,
+				465EA413199B9DCA00632812 /* DockItem.m in Sources */,
 				4689F70A1991012F0015DA41 /* UIWebView+AFNetworking.m in Sources */,
 				4689F6CB199100A80015DA41 /* SDWebImageManager.m in Sources */,
 				4689F7081991012F0015DA41 /* UIProgressView+AFNetworking.m in Sources */,

@@ -29,6 +29,14 @@
     [self.view addSubview:dock];
     
     
+    //添加dockItem
+    [dock addDockItemWithIcon:@"tabbar_home.png" title:@"首页"];
+    [dock addDockItemWithIcon:@"tabbar_message_center.png" title:@"消息"];
+    [dock addDockItemWithIcon:@"tabbar_profile.png" title:@"我"];
+    [dock addDockItemWithIcon:@"tabbar_discover.png" title:@"广场"];
+    [dock addDockItemWithIcon:@"tabbar_more.png" title:@"更多"];
+    
+    
 }
 
 /*

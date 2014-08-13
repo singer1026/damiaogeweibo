@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface Dock : UIView
-
+-(void) addDockItemWithIcon:(NSString *) icon title:(NSString *)title;
 @end
