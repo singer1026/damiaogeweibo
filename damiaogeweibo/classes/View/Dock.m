@@ -31,7 +31,7 @@
     [btn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:[icon filenameAppend:@"_selected"]] forState:UIControlStateSelected];
     [btn addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchDown];
-    //调整dock上的按钮
+    //调整dock上的按钮位置
     [self adjustDockItemsFrame];
 }
 
