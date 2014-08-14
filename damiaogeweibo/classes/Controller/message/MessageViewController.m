@@ -18,8 +18,12 @@
 {
     [super viewDidLoad];
     self.title = @"消息";
+     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"发私信" style:UIBarButtonItemStyleBordered target:self action:@selector(sendPrivateMessage)];
 }
 
+-(void)sendPrivateMessage{
+    
+}
 
 #pragma mark - Table view data source
 

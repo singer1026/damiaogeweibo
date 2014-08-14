@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-
+#import "UIBarButtonItem+create.h"
 @interface HomeViewController ()
 
 @end
@@ -19,6 +19,21 @@
     [super viewDidLoad];
     
     self.title = @"首页";
+    
+    
+    self.navigationItem.leftBarButtonItem=[UIBarButtonItem barButtonItemWithIcon:@"navigationbar_compose.png" target:self actioin:@selector(showSendWeibo)];
+    
+    self.navigationItem.rightBarButtonItem=[UIBarButtonItem barButtonItemWithIcon:@"navigationbar_pop.png" target:self actioin:@selector(popMenu)];
+}
+
+
+#pragma mark 显示发微博窗口
+-(void) showSendWeibo{
+    
+}
+
+-(void)popMenu{
+    
 }
 
 

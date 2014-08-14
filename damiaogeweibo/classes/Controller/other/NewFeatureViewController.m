@@ -74,15 +74,17 @@
     CGSize viewSize = self.view.bounds.size;
     //开始按钮
     UIButton *startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *startBtnNormalImage =[UIImage imageNamed:@"new_feature_finish_button.png"];
-    UIImage *startBtnHighlightedImage =[UIImage imageNamed:@"new_feature_finish_button_highlighted.png"];
-    [startBtn setImage:startBtnNormalImage forState:UIControlStateNormal];
-    [startBtn setImage:startBtnHighlightedImage forState:UIControlStateHighlighted];
+//    UIImage *startBtnNormalImage =[UIImage imageNamed:@"new_feature_finish_button.png"];
+//    UIImage *startBtnHighlightedImage =[UIImage imageNamed:@"new_feature_finish_button_highlighted.png"];
+//    [startBtn setImage:startBtnNormalImage forState:UIControlStateNormal];
+//    [startBtn setImage:startBtnHighlightedImage forState:UIControlStateHighlighted];
+    
+    CGSize startBtnSize = [startBtn setAllStateBg:@"new_feature_finish_button.png"];
     
     startBtn.center = CGPointMake(viewSize.width*0.5, viewSize.height*0.85);
 //    startBtn.bounds=CGRectMake(0, 0, startBtnNormalImage.size.width, startBtnNormalImage.size.height);
     
-    startBtn.bounds = (CGRect){CGPointZero , startBtnNormalImage.size};
+    startBtn.bounds = (CGRect){CGPointZero , startBtnSize};
     
     [view addSubview:startBtn];
     //监听点击时间 跳转到首页
@@ -100,7 +102,7 @@
     
     _shareBtn.center = CGPointMake(viewSize.width*0.5, viewSize.height*0.75);
     
-    _shareBtn.bounds = (CGRect){CGPointZero , startBtnNormalImage.size};
+    _shareBtn.bounds = (CGRect){CGPointZero , startBtnSize};
     
     [view addSubview:_shareBtn];
     //监听点击时间 跳转到首页
