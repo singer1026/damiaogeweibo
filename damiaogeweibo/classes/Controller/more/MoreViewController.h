@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MoreViewController : UITableViewController
+@interface MoreViewController : UITableViewController<UIActionSheetDelegate>
 
 @end

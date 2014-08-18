@@ -40,9 +40,37 @@
     self.tableView.sectionHeaderHeight = 5;
     self.tableView.sectionFooterHeight = 5;
     
+    //添加退出账号按钮到footView中
+    UIButton *loginOutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [loginOutBtn setAllStateBg:@"common_button_red.png"];
+    
+    if (IOS7) {
+        [loginOutBtn setFrame:CGRectMake(1, 10, 318, 40)];
+    }else{
+         [loginOutBtn setFrame:CGRectMake(10, 10, 300, 40)];
+    }
+    
+    NSString *loginOutBtnTitle = (NSString *)_data.lastObject[0][@"name"];
+    [loginOutBtn setTitle:loginOutBtnTitle forState:UIControlStateNormal];
+    
+    UIView *loginOutFootView = [[UIView alloc] init];
+    loginOutFootView.frame = CGRectMake(0, 0, 300, 70);//高度70是为了给底部留空隙
+    [loginOutFootView addSubview:loginOutBtn];
+    self.tableView.tableFooterView = loginOutFootView;
+    
+    
+    [loginOutBtn addTarget:self action:@selector(exit) forControlEvents:UIControlEventTouchUpInside];
 //    self.automaticallyAdjustsScrollViewInsets =NO;
 }
 
+-(void)exit{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"您确定要退出当前账号吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出" otherButtonTitles:nil, nil];
+    [sheet showInView:self.view.window];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonInde{
+    
+}
 -(void)setting{
     
 }
@@ -53,7 +81,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
-    return _data.count;
+    return _data.count-1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -81,6 +109,7 @@
         UIImageView *selectedBg = [[UIImageView alloc] init];
         cell.selectedBackgroundView = selectedBg;
         cell.backgroundColor = [UIColor clearColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     
@@ -107,8 +136,6 @@
         }
     }
     
-    
-    //一组只有一个
     bg.image = [UIImage stretchImageWithName:backageImageName];
     selectedBg.image = [UIImage stretchImageWithName:[backageImageName filenameAppend:@"_highlighted"]];
     
