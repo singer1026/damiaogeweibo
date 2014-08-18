@@ -31,7 +31,8 @@
 
 // 判断是否为iPhone5
 #define iPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
-
+//判断是否为iOS7
+#define IOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
 #import "UIImage+image.h"
 #import "NSString+file.h"
 #import "UIButton+bg.h"

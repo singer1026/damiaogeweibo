@@ -1329,6 +1329,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "damiaogeweibo/damiaogeweibo-Prefix.pch";
 				INFOPLIST_FILE = "damiaogeweibo/damiaogeweibo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1347,6 +1348,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "damiaogeweibo/damiaogeweibo-Prefix.pch";
 				INFOPLIST_FILE = "damiaogeweibo/damiaogeweibo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

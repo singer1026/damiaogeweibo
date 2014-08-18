@@ -35,7 +35,29 @@
     
     [self selectControllerAtIndex:0];
     
+    //设置导航栏样式
+    [self setNavigationTheme];
 
+}
+
+#pragma mark 设置导航栏样式
+-(void) setNavigationTheme{
+    //操作整个应用中的所有导航栏，只需要给它设置就可以了
+    UINavigationBar *navBar = [UINavigationBar appearance];
+  
+    if (!IOS7) {
+        [navBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_background.png"] forBarMetrics:UIBarMetricsDefault];
+        //设置状态栏背景样式
+        [UIApplication sharedApplication].statusBarStyle =
+        UIStatusBarStyleLightContent;
+    }
+   
+    [navBar setTitleTextAttributes:
+     @{
+       UITextAttributeTextColor : [UIColor darkGrayColor],
+       UITextAttributeTextShadowOffset :
+           [NSValue valueWithUIOffset:UIOffsetZero]
+       }];
 }
 
 #pragma mark 重写addChildViewController方法
