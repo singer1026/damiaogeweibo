@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "UIBarButtonItem+create.h"
+#import "SendWeiboViewController.h"
 @interface HomeViewController ()
 
 @end
@@ -29,7 +30,9 @@
 
 #pragma mark 显示发微博窗口
 -(void) showSendWeibo{
-    
+    SendWeiboViewController *sendWebo = [[SendWeiboViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:sendWebo];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 -(void)popMenu{

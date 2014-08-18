@@ -16,4 +16,13 @@
     }
     return [UIImage imageNamed:name];
 }
+
++(UIImage *) stretchImageWithName:(NSString *) imageName{
+    
+    UIImage *image = [UIImage imageNamed:imageName];
+    image = [image stretchableImageWithLeftCapWidth:image.size.width*0.5 topCapHeight:image.size.height*0.5];
+//    UIEdgeInsets insets = UIEdgeInsetsMake(5, 5, 5, 5);
+//    image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    return image;
+}
 @end

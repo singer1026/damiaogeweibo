@@ -44,20 +44,40 @@
 -(void) setNavigationTheme{
     //操作整个应用中的所有导航栏，只需要给它设置就可以了
     UINavigationBar *navBar = [UINavigationBar appearance];
-  
-    if (!IOS7) {
+    
+    if(!IOS7){
         [navBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_background.png"] forBarMetrics:UIBarMetricsDefault];
-        //设置状态栏背景样式
-        [UIApplication sharedApplication].statusBarStyle =
-        UIStatusBarStyleLightContent;
     }
-   
+    
+    //设置状态栏背景样式
+    [UIApplication sharedApplication].statusBarStyle =
+    UIStatusBarStyleLightContent;
+    
     [navBar setTitleTextAttributes:
      @{
        UITextAttributeTextColor : [UIColor darkGrayColor],
        UITextAttributeTextShadowOffset :
            [NSValue valueWithUIOffset:UIOffsetZero]
        }];
+    
+    
+    //统一设置导航栏的按钮背景
+    UIBarButtonItem *barItem = [UIBarButtonItem appearance];
+    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_pushed.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [barItem setBackgroundImage:
+     [UIImage imageNamed:@"navigationbar_button_background_disabled.png"]
+                       forState:UIControlStateDisabled
+                     barMetrics:UIBarMetricsDefault];
+    
+    NSDictionary *textAttrbutes=@{
+                                  UITextAttributeFont:[UIFont systemFontOfSize:12],
+                                  UITextAttributeTextColor : [UIColor darkGrayColor],
+                                  UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetZero]
+                                  };
+    
+    [barItem setTitleTextAttributes:textAttrbutes forState:UIControlStateNormal];
+    [barItem setTitleTextAttributes:textAttrbutes forState:UIControlStateHighlighted];
 }
 
 #pragma mark 重写addChildViewController方法
@@ -76,9 +96,9 @@
    
     DiscoverViewController *discover = [[DiscoverViewController alloc] init];
    
-    MoreViewController *more = [[MoreViewController alloc] init];
+    MoreViewController *more = [[MoreViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
-   
+    [more.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     [self addChildViewController:home];
     [self addChildViewController:message];

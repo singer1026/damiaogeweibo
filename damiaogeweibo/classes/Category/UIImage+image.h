@@ -10,4 +10,5 @@
 
 @interface UIImage (image)
 +(UIImage *) fullscreenImageWithName:(NSString *)name;
++(UIImage *) stretchImageWithName:(NSString *) imageName;
 @end

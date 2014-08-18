@@ -10,11 +10,10 @@
 @implementation UIButton (bg)
 -(CGSize) setAllStateBg:(NSString *)icon{
     
-    UIImage *normalImage = [UIImage imageNamed:icon];
+    UIImage *normalImage = [UIImage stretchImageWithName:icon];
     [self setImage:normalImage forState:UIControlStateNormal];
-    
-    
-    [self setImage:[UIImage imageNamed:[icon filenameAppend:@"_highlighted"]] forState:UIControlStateHighlighted];
+    UIImage *highlightedImage = [UIImage stretchImageWithName:[icon filenameAppend:@"_highlighted"]];
+    [self setImage:highlightedImage forState:UIControlStateHighlighted];
     return normalImage.size;
     
 }

@@ -32,7 +32,12 @@
 // 判断是否为iPhone5
 #define iPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
 //判断是否为iOS7
-#define IOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
+#define IOS7 ([[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0)
+//全局统一背景颜色
+#define kGlobalBg [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]
+//iOS版本
+#define ios_version [[[UIDevice currentDevice]systemVersion] floatValue] 
+
 #import "UIImage+image.h"
 #import "NSString+file.h"
 #import "UIButton+bg.h"
