@@ -10,4 +10,7 @@
 
 @interface NSString (file)
 - (NSString *)filenameAppend:(NSString *)append;
+
+#pragma mark Unicode编码转成中文
++(NSString *)replaceUnicode:(NSString *)unicodeStr
 @end
