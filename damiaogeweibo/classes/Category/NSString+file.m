@@ -23,6 +23,13 @@
     return [filename stringByAppendingPathExtension:extension];
 }
 
+/**
+ *  把unicode 转成中文
+ *
+ *  @param unicodeStr
+ *
+ *  @return string
+ */
 +(NSString *)replaceUnicode:(NSString *)unicodeStr
 {
     
