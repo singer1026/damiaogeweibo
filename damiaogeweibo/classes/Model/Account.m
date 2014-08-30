@@ -16,7 +16,7 @@
         self.screenName = [decoder decodeObjectForKey:@"screen_name"];
     }
 
-    return nil;
+    return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder{

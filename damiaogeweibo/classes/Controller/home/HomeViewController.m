@@ -9,6 +9,8 @@
 #import "HomeViewController.h"
 #import "UIBarButtonItem+create.h"
 #import "SendWeiboViewController.h"
+#import "AccountTool.h"
+#import "Account.h"
 @interface HomeViewController ()
 
 @end
@@ -19,7 +21,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"首页";
+    self.title = [AccountTool sharedAccountTool].currentAccount.screenName;
     
     
     self.navigationItem.leftBarButtonItem=[UIBarButtonItem barButtonItemWithIcon:@"navigationbar_compose.png" target:self actioin:@selector(showSendWeibo)];

@@ -81,11 +81,6 @@
         }];
         [operation start];
         
-        
-        
-//        MainViewController *mainVC = [[MainViewController alloc] init];
-//        self.window.rootViewController = mainVC ;
-        
     }else{
         NSLog(@"登录失败");
     }

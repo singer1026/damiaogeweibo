@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "OauthViewController.h"
 #import "Account.h"
+#import "AccountTool.h"
 @interface AppDelegate()
 {
     OauthViewController *_oautchController;
@@ -55,21 +56,19 @@
 -(void)startWeibo:(BOOL)shared{
     [UIApplication sharedApplication].statusBarHidden = NO;
     
-//    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-//    if (accessToken) {
-//        MainViewController *mainVC = [[MainViewController alloc] init];
-//        
-//        self.window.rootViewController = mainVC ;
-//    }else{
-//        //如果没有登录则调到登录界面
-//        OauthViewController *oautchController = [[OauthViewController alloc] init];
-//        oautchController.view.frame = [[UIScreen mainScreen] bounds];
-//        self.window.rootViewController = oautchController;
-//    }
 
-    //如果没有登录则调到登录界面
-    _oautchController = [[OauthViewController alloc] init];
-    self.window.rootViewController = _oautchController;
+    Account *currentAccount = [AccountTool sharedAccountTool].currentAccount;
+    if (currentAccount) {
+        MainViewController *mainVC = [[MainViewController alloc] init];
+        self.window.rootViewController = mainVC ;
+      }else{
+        //如果没有登录则调到登录界面
+        _oautchController = [[OauthViewController alloc] init];
+        self.window.rootViewController = _oautchController;
+
+
+    }
+    
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
