@@ -7,6 +7,9 @@
 //
 
 #import "OauthViewController.h"
+#import "Account.h"
+#import "AccountTool.h"
+#import "MainViewController.h"
 
 @interface OauthViewController ()
 
@@ -44,10 +47,49 @@
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)loginWithResponse:(WBBaseResponse *)response{
+    NSString *accessToken =[(WBAuthorizeResponse *)response accessToken];
+    NSString *uid = [(WBAuthorizeResponse *)response userID];
+    if (accessToken !=nil && accessToken.length != 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"accessToken"];
+        [[NSUserDefaults standardUserDefaults] setObject:uid forKey:@"userID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        Account *account  = [[Account alloc] init];
+        account.accessToken = accessToken;
+        account.uid = uid;
+        //发送求获取用户信息
+        NSString *urlStr = [NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?uid=%@&access_token=%@",uid,accessToken];
+        
+        NSURL *url = [NSURL URLWithString:urlStr];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            MyLog(@"用户信息：%@",JSON);
+            account.screenName = JSON[@"screen_name"];
+            //归档
+            [[AccountTool sharedAccountTool] addAccount:account];
+            
+            //登录成功进入主界面
+            MainViewController *main = [[MainViewController alloc] init];
+            self.view.window.rootViewController = main;
+            
+         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            MyLog(@"获取用户信息失败");
+            
+            
+        }];
+        [operation start];
+        
+        
+        
+//        MainViewController *mainVC = [[MainViewController alloc] init];
+//        self.window.rootViewController = mainVC ;
+        
+    }else{
+        NSLog(@"登录失败");
+    }
+    
 }
 
 /*

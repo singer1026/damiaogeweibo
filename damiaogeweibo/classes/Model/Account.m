@@ -13,6 +13,7 @@
     if (self == [super init]) {
         self.accessToken = [decoder decodeObjectForKey:kAccessToken];
         self.uid = [decoder decodeObjectForKey:kUid];
+        self.screenName = [decoder decodeObjectForKey:@"screen_name"];
     }
 
     return nil;
@@ -21,5 +22,6 @@
 -(void)encodeWithCoder:(NSCoder *)encoder{
     [encoder encodeObject:self.accessToken forKey:kAccessToken];
     [encoder encodeObject:self.uid forKey:kUid];
+    [encoder encodeObject:self.screenName forKey:@"screen_name"];
 }
 @end

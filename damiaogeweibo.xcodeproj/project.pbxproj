@@ -11,6 +11,7 @@
 		46064FD819B210640080EBEE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 46064FD719B210640080EBEE /* Account.m */; };
 		46138D7919B229F2009BE421 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46138D7819B229F2009BE421 /* MBProgressHUD.m */; };
 		46245826199261C30024E55C /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 46245825199261C30024E55C /* NSString+file.m */; };
+		46490ED119B240D900D5EFF5 /* AccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 46490ED019B240D900D5EFF5 /* AccountTool.m */; };
 		465EA413199B9DCA00632812 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 465EA412199B9DCA00632812 /* DockItem.m */; };
 		4680A9CC199CED0500CBF47E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9C9199CED0500CBF47E /* MainViewController.m */; };
 		4680A9CD199CED0500CBF47E /* NewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9CB199CED0500CBF47E /* NewFeatureViewController.m */; };
@@ -198,6 +199,9 @@
 		46138D7819B229F2009BE421 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		46245824199261C30024E55C /* NSString+file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+file.h"; sourceTree = "<group>"; };
 		46245825199261C30024E55C /* NSString+file.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+file.m"; sourceTree = "<group>"; };
+		46490ECE19B240BA00D5EFF5 /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		46490ECF19B240D900D5EFF5 /* AccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTool.h; sourceTree = "<group>"; };
+		46490ED019B240D900D5EFF5 /* AccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTool.m; sourceTree = "<group>"; };
 		465EA411199B9DCA00632812 /* DockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockItem.h; sourceTree = "<group>"; };
 		465EA412199B9DCA00632812 /* DockItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockItem.m; sourceTree = "<group>"; };
 		4680A9C8199CED0500CBF47E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -452,6 +456,16 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		46490ECD19B2402E00D5EFF5 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				46490ECE19B240BA00D5EFF5 /* Singleton.h */,
+				46490ECF19B240D900D5EFF5 /* AccountTool.h */,
+				46490ED019B240D900D5EFF5 /* AccountTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		4680A9C1199CEC4F00CBF47E /* discover */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +675,7 @@
 		46C0A9AC198FCAD800C99AD9 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				46490ECD19B2402E00D5EFF5 /* Tool */,
 				46D19931199259E900B552FA /* Category */,
 				46C0A9AF198FCAD800C99AD9 /* Other */,
 				46C0A9AD198FCAD800C99AD9 /* Controller */,
@@ -1156,6 +1171,7 @@
 				4689F6A01991009F0015DA41 /* UIScrollView+MJRefresh.m in Sources */,
 				4689F6C5199100A80015DA41 /* NSData+ImageContentType.m in Sources */,
 				4689F6CE199100A80015DA41 /* UIImage+GIF.m in Sources */,
+				46490ED119B240D900D5EFF5 /* AccountTool.m in Sources */,
 				4680A9CC199CED0500CBF47E /* MainViewController.m in Sources */,
 				46D111A019B2359A00040147 /* AFHTTPClient.m in Sources */,
 				4680A9D6199CEE0300CBF47E /* MessageViewController.m in Sources */,

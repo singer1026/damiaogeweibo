@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OauthViewController : UIViewController
-
+-(void)loginWithResponse:(WBBaseResponse *)response;
 @end

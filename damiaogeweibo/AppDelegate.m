@@ -11,6 +11,11 @@
 #import "MainViewController.h"
 #import "OauthViewController.h"
 #import "Account.h"
+@interface AppDelegate()
+{
+    OauthViewController *_oautchController;
+}
+@end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -63,8 +68,8 @@
 //    }
 
     //如果没有登录则调到登录界面
-    OauthViewController *oautchController = [[OauthViewController alloc] init];
-    self.window.rootViewController = oautchController;
+    _oautchController = [[OauthViewController alloc] init];
+    self.window.rootViewController = _oautchController;
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
@@ -85,60 +90,11 @@
 -(void)didReceiveWeiboResponse:(WBBaseResponse *)response{
 //    NSLog(@"------%@",response.userInfo);
     if ([response isKindOfClass:WBAuthorizeResponse.class]){
-        NSString *accessToken =[(WBAuthorizeResponse *)response accessToken];
-        NSString *uid = [(WBAuthorizeResponse *)response userID];
-        if (accessToken !=nil && accessToken.length != 0) {
-            [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"accessToken"];
-            [[NSUserDefaults standardUserDefaults] setObject:uid forKey:@"userID"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            Account *account  = [[Account alloc] init];
-            account.accessToken = accessToken;
-            account.uid = uid;
-            //发送求获取用户信息
-            [self loadUserData];
-            
-            MainViewController *mainVC = [[MainViewController alloc] init];
-            self.window.rootViewController = mainVC ;
-
-        }else{
-            NSLog(@"登录失败");
-        }
-        
+        [_oautchController loginWithResponse:response];
     }
 }
 
-#pragma mark 发送求获取用户信息
--(void) loadUserData{
-    NSString *userID = [[NSUserDefaults standardUserDefaults] valueForKey:@"userID"];
-    NSString *accessToken =[[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
-    NSString *urlStr = [NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?uid=%@&access_token=%@",userID,accessToken];
-    
-    NSURL *url = [NSURL URLWithString:urlStr];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        MyLog(@"用户信息：%@",JSON);
-        MyLog(@"%d",[JSON isKindOfClass:[NSDictionary class]]);
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        
-    }];
-    [operation start];
-//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        //请求成功
-//        NSString *requestTmp = [NSString stringWithString:operation.responseString];
-//        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
-//        //系统自带JSON解析
-//        NSDictionary *dictData = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
-//        NSLog(@"用户信息:\n%@",dictData);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"加载错误%@",error);
-//    }];
-//    [operation start];
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
