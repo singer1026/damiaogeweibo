@@ -1,6 +1,6 @@
 // AFNetworkActivityIndicatorManager.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2011 Gowalla (http://gowalla.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,6 @@
 #import <Availability.h>
 
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
-
 #import <UIKit/UIKit.h>
 
 /**
@@ -67,7 +66,7 @@
 - (void)incrementActivityCount;
 
 /**
- Decrements the number of active network requests. If this number becomes zero after decrementing, this will stop animating the status bar network activity indicator.
+ Decrements the number of active network requests. If this number becomes zero before decrementing, this will stop animating the status bar network activity indicator.
  */
 - (void)decrementActivityCount;
 
