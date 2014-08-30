@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "NewFeatureViewController.h"
 #import "MainViewController.h"
+#import "OauthViewController.h"
+#import "Account.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -48,9 +50,21 @@
 -(void)startWeibo:(BOOL)shared{
     [UIApplication sharedApplication].statusBarHidden = NO;
     
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    
-    self.window.rootViewController = mainVC ;
+//    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+//    if (accessToken) {
+//        MainViewController *mainVC = [[MainViewController alloc] init];
+//        
+//        self.window.rootViewController = mainVC ;
+//    }else{
+//        //如果没有登录则调到登录界面
+//        OauthViewController *oautchController = [[OauthViewController alloc] init];
+//        oautchController.view.frame = [[UIScreen mainScreen] bounds];
+//        self.window.rootViewController = oautchController;
+//    }
+
+    //如果没有登录则调到登录界面
+    OauthViewController *oautchController = [[OauthViewController alloc] init];
+    self.window.rootViewController = oautchController;
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
@@ -67,13 +81,28 @@
     }
 }
 
+#pragma mark 登录以后获取accessToken和userID
 -(void)didReceiveWeiboResponse:(WBBaseResponse *)response{
 //    NSLog(@"------%@",response.userInfo);
     if ([response isKindOfClass:WBAuthorizeResponse.class]){
-        // self.wbtoken = [(WBAuthorizeResponse *)response accessToken];
-        [[NSUserDefaults standardUserDefaults] setObject:[(WBAuthorizeResponse *)response accessToken] forKey:@"accessToken"];
-        [[NSUserDefaults standardUserDefaults] setObject:[(WBAuthorizeResponse *)response userID] forKey:@"userID"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *accessToken =[(WBAuthorizeResponse *)response accessToken];
+        NSString *uid = [(WBAuthorizeResponse *)response userID];
+        if (accessToken !=nil && accessToken.length != 0) {
+            [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"accessToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:uid forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            Account *account  = [[Account alloc] init];
+            account.accessToken = accessToken;
+            account.uid = uid;
+            
+            MainViewController *mainVC = [[MainViewController alloc] init];
+            self.window.rootViewController = mainVC ;
+
+        }else{
+            NSLog(@"登录失败");
+        }
+        
     }
 }
 

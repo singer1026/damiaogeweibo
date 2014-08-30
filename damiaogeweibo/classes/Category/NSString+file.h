@@ -18,5 +18,5 @@
  * @returns YES if recorder setup correctly, NO if there is an error
  */
 #pragma mark Unicode编码转成中文
-+(NSString *)replaceUnicode:(NSString *)unicodeStr
++(NSString *)replaceUnicode:(NSString *)unicodeStr;
 @end

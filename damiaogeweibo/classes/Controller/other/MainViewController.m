@@ -13,6 +13,8 @@
 #import "ProfileViewController.h"
 #import "DiscoverViewController.h"
 #import "MoreViewController.h"
+
+
 @interface MainViewController ()
 {
     UIViewController *_selectedViewController;
@@ -95,7 +97,7 @@
     ProfileViewController *profile = [[ProfileViewController alloc] init];
    
     DiscoverViewController *discover = [[DiscoverViewController alloc] init];
-   
+
     MoreViewController *more = [[MoreViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
     [more.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46064FD519B2045C0080EBEE /* OauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46064FD419B2045C0080EBEE /* OauthViewController.m */; };
+		46064FD819B210640080EBEE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 46064FD719B210640080EBEE /* Account.m */; };
 		46245826199261C30024E55C /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 46245825199261C30024E55C /* NSString+file.m */; };
 		465EA413199B9DCA00632812 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 465EA412199B9DCA00632812 /* DockItem.m */; };
 		4680A9CC199CED0500CBF47E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9C9199CED0500CBF47E /* MainViewController.m */; };
@@ -195,6 +197,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46064FD319B2045C0080EBEE /* OauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OauthViewController.h; sourceTree = "<group>"; };
+		46064FD419B2045C0080EBEE /* OauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OauthViewController.m; sourceTree = "<group>"; };
+		46064FD619B210640080EBEE /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		46064FD719B210640080EBEE /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		46245824199261C30024E55C /* NSString+file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+file.h"; sourceTree = "<group>"; };
 		46245825199261C30024E55C /* NSString+file.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+file.m"; sourceTree = "<group>"; };
 		465EA411199B9DCA00632812 /* DockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockItem.h; sourceTree = "<group>"; };
@@ -719,6 +725,8 @@
 		46C0A9AE198FCAD800C99AD9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				46064FD619B210640080EBEE /* Account.h */,
+				46064FD719B210640080EBEE /* Account.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -728,6 +736,8 @@
 			children = (
 				46CEC44C198FADC60084DA0E /* AppDelegate.h */,
 				46CEC44D198FADC60084DA0E /* AppDelegate.m */,
+				46064FD319B2045C0080EBEE /* OauthViewController.h */,
+				46064FD419B2045C0080EBEE /* OauthViewController.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1166,6 +1176,7 @@
 				4689F7081991012F0015DA41 /* UIProgressView+AFNetworking.m in Sources */,
 				4680A9D0199CEDDE00CBF47E /* HomeViewController.m in Sources */,
 				4689F7031991012F0015DA41 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				46064FD519B2045C0080EBEE /* OauthViewController.m in Sources */,
 				4689F6ED199101270015DA41 /* AFURLConnectionOperation.m in Sources */,
 				46CEC479198FAF070084DA0E /* WeiboSDK.h in Sources */,
 				4689F69E1991009F0015DA41 /* MJRefreshHeaderView.m in Sources */,
@@ -1187,6 +1198,7 @@
 				4680A9CC199CED0500CBF47E /* MainViewController.m in Sources */,
 				4680A9D6199CEE0300CBF47E /* MessageViewController.m in Sources */,
 				4689F6CD199100A80015DA41 /* UIButton+WebCache.m in Sources */,
+				46064FD819B210640080EBEE /* Account.m in Sources */,
 				4689F69C1991009F0015DA41 /* MJRefreshConst.m in Sources */,
 				4680A9D9199CEE1200CBF47E /* MoreViewController.m in Sources */,
 				4689F6CC199100A80015DA41 /* SDWebImagePrefetcher.m in Sources */,

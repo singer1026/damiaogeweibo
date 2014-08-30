@@ -38,6 +38,9 @@
 //iOS版本
 #define ios_version [[[UIDevice currentDevice]systemVersion] floatValue] 
 
+#define kAccessToken @"access_token"
+#define kUid @"uid"
+
 #import "UIImage+image.h"
 #import "NSString+file.h"
 #import "UIButton+bg.h"
