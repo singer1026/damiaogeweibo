@@ -11,4 +11,7 @@
 @interface Account : NSObject<NSCoding>
 @property (nonatomic,copy)NSString *uid;
 @property(nonatomic,copy)NSString *accessToken;
+
+//昵称
+@property(nonatomic,copy) NSString *screenName;
 @end

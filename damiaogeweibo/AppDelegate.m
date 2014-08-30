@@ -95,6 +95,8 @@
             Account *account  = [[Account alloc] init];
             account.accessToken = accessToken;
             account.uid = uid;
+            //发送求获取用户信息
+            [self loadUserData];
             
             MainViewController *mainVC = [[MainViewController alloc] init];
             self.window.rootViewController = mainVC ;
@@ -104,6 +106,30 @@
         }
         
     }
+}
+
+#pragma mark 发送求获取用户信息
+-(void) loadUserData{
+    NSString *userID = [[NSUserDefaults standardUserDefaults] valueForKey:@"userID"];
+    NSString *accessToken =[[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?uid=%@&access_token=%@",userID,accessToken];
+    
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //请求成功
+        NSString *requestTmp = [NSString stringWithString:operation.responseString];
+        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+        //系统自带JSON解析
+        NSDictionary *dictData = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"用户信息:\n%@",dictData);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"加载错误%@",error);
+    }];
+    [operation start];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		46064FD519B2045C0080EBEE /* OauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46064FD419B2045C0080EBEE /* OauthViewController.m */; };
 		46064FD819B210640080EBEE /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 46064FD719B210640080EBEE /* Account.m */; };
+		46138D7919B229F2009BE421 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46138D7819B229F2009BE421 /* MBProgressHUD.m */; };
 		46245826199261C30024E55C /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 46245825199261C30024E55C /* NSString+file.m */; };
 		465EA413199B9DCA00632812 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 465EA412199B9DCA00632812 /* DockItem.m */; };
 		4680A9CC199CED0500CBF47E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9C9199CED0500CBF47E /* MainViewController.m */; };
@@ -201,6 +202,8 @@
 		46064FD419B2045C0080EBEE /* OauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OauthViewController.m; sourceTree = "<group>"; };
 		46064FD619B210640080EBEE /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		46064FD719B210640080EBEE /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		46138D7719B229F2009BE421 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		46138D7819B229F2009BE421 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		46245824199261C30024E55C /* NSString+file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+file.h"; sourceTree = "<group>"; };
 		46245825199261C30024E55C /* NSString+file.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+file.m"; sourceTree = "<group>"; };
 		465EA411199B9DCA00632812 /* DockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockItem.h; sourceTree = "<group>"; };
@@ -465,6 +468,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46138D7619B229F2009BE421 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				46138D7719B229F2009BE421 /* MBProgressHUD.h */,
+				46138D7819B229F2009BE421 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		4680A9C1199CEC4F00CBF47E /* discover */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +772,7 @@
 				46CEC443198FADC60084DA0E /* damiaogeweibo */,
 				46CEC462198FADC60084DA0E /* damiaogeweiboTests */,
 				46CEC472198FAE950084DA0E /* weiboSDK */,
+				46138D7619B229F2009BE421 /* MBProgressHUD */,
 				4689F6891991009F0015DA41 /* MJRefresh */,
 				4689F6A2199100A80015DA41 /* SDWebImage */,
 				4689F6D4199101270015DA41 /* AFNetworking */,
@@ -1173,6 +1186,7 @@
 				465EA413199B9DCA00632812 /* DockItem.m in Sources */,
 				4689F70A1991012F0015DA41 /* UIWebView+AFNetworking.m in Sources */,
 				4689F6CB199100A80015DA41 /* SDWebImageManager.m in Sources */,
+				46138D7919B229F2009BE421 /* MBProgressHUD.m in Sources */,
 				4689F7081991012F0015DA41 /* UIProgressView+AFNetworking.m in Sources */,
 				4680A9D0199CEDDE00CBF47E /* HomeViewController.m in Sources */,
 				4689F7031991012F0015DA41 /* AFNetworkActivityIndicatorManager.m in Sources */,
