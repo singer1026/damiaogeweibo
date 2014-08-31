@@ -41,6 +41,8 @@
 #define kAccessToken @"access_token"
 #define kUid @"uid"
 
+#define kBaseURL @"https://api.weibo.com/2/"
+
 #import "UIImage+image.h"
 #import "NSString+file.h"
 #import "UIButton+bg.h"
@@ -48,4 +50,4 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
-
+#import "NSURLRequest+Url.h"

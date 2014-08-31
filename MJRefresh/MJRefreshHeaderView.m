@@ -20,7 +20,7 @@
 @implementation MJRefreshHeaderView
 #pragma mark - 控件初始化
 /**
- *  时间标签
+ *   时间标签
  */
 - (UILabel *)lastUpdateTimeLabel
 {
