@@ -10,6 +10,7 @@
 #import "Account.h"
 #import "AccountTool.h"
 #import "MainViewController.h"
+#import "MBProgressHUD.h"
 
 @interface OauthViewController ()
 

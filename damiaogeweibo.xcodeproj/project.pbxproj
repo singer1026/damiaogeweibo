@@ -16,6 +16,7 @@
 		46245826199261C30024E55C /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 46245825199261C30024E55C /* NSString+file.m */; };
 		46490ED119B240D900D5EFF5 /* AccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 46490ED019B240D900D5EFF5 /* AccountTool.m */; };
 		465EA413199B9DCA00632812 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 465EA412199B9DCA00632812 /* DockItem.m */; };
+		466B923C19B4C197009B4B8C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 466B923B19B4C197009B4B8C /* User.m */; };
 		4680A9CC199CED0500CBF47E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9C9199CED0500CBF47E /* MainViewController.m */; };
 		4680A9CD199CED0500CBF47E /* NewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9CB199CED0500CBF47E /* NewFeatureViewController.m */; };
 		4680A9D0199CEDDE00CBF47E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4680A9CF199CEDDE00CBF47E /* HomeViewController.m */; };
@@ -213,6 +214,8 @@
 		46490ED019B240D900D5EFF5 /* AccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTool.m; sourceTree = "<group>"; };
 		465EA411199B9DCA00632812 /* DockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockItem.h; sourceTree = "<group>"; };
 		465EA412199B9DCA00632812 /* DockItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockItem.m; sourceTree = "<group>"; };
+		466B923A19B4C197009B4B8C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		466B923B19B4C197009B4B8C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		4680A9C8199CED0500CBF47E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4680A9C9199CED0500CBF47E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4680A9CA199CED0500CBF47E /* NewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureViewController.h; sourceTree = "<group>"; };
@@ -717,6 +720,8 @@
 				4606E95719B378E2009B13BB /* Status.m */,
 				46064FD619B210640080EBEE /* Account.h */,
 				46064FD719B210640080EBEE /* Account.m */,
+				466B923A19B4C197009B4B8C /* User.h */,
+				466B923B19B4C197009B4B8C /* User.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1181,6 +1186,7 @@
 				4689F69B1991009F0015DA41 /* MJRefreshBaseView.m in Sources */,
 				4680A9DC199CEE2200CBF47E /* ProfileViewController.m in Sources */,
 				46D111A419B2359A00040147 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				466B923C19B4C197009B4B8C /* User.m in Sources */,
 				46CEC44E198FADC60084DA0E /* AppDelegate.m in Sources */,
 				468CF1E31992781A00BA62A4 /* Dock.m in Sources */,
 				4689F6C4199100A80015DA41 /* MKAnnotationView+WebCache.m in Sources */,

@@ -19,11 +19,24 @@
  */
 
 #import <Foundation/Foundation.h>
+@class User;
 
 @interface Status : NSObject
 @property (nonatomic, copy) NSString *idstr; // ID
 @property (nonatomic, copy) NSString *text; // 内容
 @property (nonatomic, copy) NSString *source; // 来源
 
+
+@property (nonatomic, assign) int repostsCount;  // 转发数
+@property (nonatomic, assign) int commentsCount;  // 评论数
+@property (nonatomic, assign) int attitudesCount;  // 表态数
+
+@property (nonatomic, strong) NSArray *picUrls; // 所有的图片
+
+@property (nonatomic, copy) NSString *createdAt; // 创建时间
+
+@property (nonatomic, strong) Status *retweetedStatus; // 被转发的微博
+
+@property (nonatomic, strong) User *user; // 微博发送者
 - (id)initWithDict:(NSDictionary *)dict;
 @end
