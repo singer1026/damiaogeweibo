@@ -48,6 +48,7 @@
 #import "UIButton+bg.h"
 #import "UIBarButtonItem+create.h"
 #import "AFNetworking.h"
-#import "MBProgressHUD.h"
+#import "MBProgressHUD+Show.h"
 #import "AFNetworking.h"
 #import "NSURLRequest+Url.h"
+#import "UIImageView+WebCache.h"

@@ -21,7 +21,7 @@
                                                                                  @"since_id" : sinceId,
                                                                                  @"max_id" : maxId
                                                                                  }];
-    
+   
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         // 1.取出所有的微博数据
         NSArray *array = JSON[@"statuses"];

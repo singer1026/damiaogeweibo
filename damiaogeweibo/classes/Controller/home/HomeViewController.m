@@ -13,6 +13,7 @@
 #import "Account.h"
 #import "StatusTool.h"
 #import "Status.h"
+#import "User.h"
 @interface HomeViewController ()
 {
     // 所有的微博数据
@@ -38,12 +39,18 @@
 //    NSURL *url = [NSURL URLWithString:urlstr];
 //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     _statuses = [NSMutableArray array];
-    
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"正在加载数据……";
     [StatusTool statusesWithSinceId:nil maxId:nil success:^(NSMutableArray *statuses) {
         [_statuses addObjectsFromArray:statuses];
-        
+
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tableView reloadData];
-    } fail:nil];
+    } fail:^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        [MBProgressHUD showErrorWithText:@"加载失败，请检查您的网络连接！"];
+    }];
 }
 
 
@@ -76,13 +83,22 @@
     
     //如果缓存池中没有，才需要传入一个标识创建新的cell
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
     }
     
     Status *s  = _statuses[indexPath.row];
     //覆盖数据
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:s.user.profileImageUrl] placeholderImage:[UIImage imageNamed:@"avatar_default.png"] options:SDWebImageLowPriority | SDWebImageRefreshCached | SDWebImageRetryFailed];
     [cell.textLabel setText:s.text];
     return cell;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Status *s = _statuses[indexPath.row];
+    CGSize textSize = [s.text sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(250, MAXFLOAT)];
+    return textSize.height + 50;
 }
 
 @end
