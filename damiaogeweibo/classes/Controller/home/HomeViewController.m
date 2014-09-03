@@ -14,6 +14,7 @@
 #import "StatusTool.h"
 #import "Status.h"
 #import "User.h"
+#import "MJRefresh.h"
 @interface HomeViewController ()
 {
     // 所有的微博数据
@@ -23,9 +24,60 @@
 
 @implementation HomeViewController
 
+-(void) loadWeiboDataWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId {
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"正在加载数据……";
+    [StatusTool statusesWithSinceId:sinceId maxId:maxId success:^(NSMutableArray *statuses) {
+        if (sinceId == nil && maxId == nil) {
+            //第一次进入加载数据
+            _statuses=statuses;
+        }else if(maxId != nil && sinceId == nil){
+            //上拉加载更多
+           [_statuses addObjectsFromArray:statuses];
+        }else{
+            //下拉刷新
+            [statuses addObjectsFromArray:_statuses];
+            _statuses=statuses;
+        }
+        
+        [self.tableView headerEndRefreshing];
+        [self.tableView footerEndRefreshing];
+        [self.tableView reloadData];
+    } fail:^{
+        [self.tableView headerEndRefreshing];
+        [self.tableView footerEndRefreshing];
+    }];
+}
+
+-(void) headerRereshing{
+    //加载ID>sinceId的微博
+    NSString *sinceId = nil;
+    if (_statuses.count) { // 取出最前面那条微博的id
+        Status *first = _statuses[0];
+        sinceId = first.idstr;
+    }
+    [self loadWeiboDataWithSinceId:sinceId maxId:nil];
+
+}
+
+-(void)footerRereshing{
+    if (_statuses.count) {
+        Status *lastStatus = _statuses.lastObject;
+        NSString *maxId = lastStatus.idstr;
+        long long lastMaxid = [maxId longLongValue];
+        lastMaxid--;
+        [self loadWeiboDataWithSinceId:nil maxId:[NSString stringWithFormat:@"%lld",lastMaxid]];
+    }
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
     
     self.title = [AccountTool sharedAccountTool].currentAccount.screenName;
     
@@ -40,17 +92,8 @@
 //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     _statuses = [NSMutableArray array];
 
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"正在加载数据……";
-    [StatusTool statusesWithSinceId:nil maxId:nil success:^(NSMutableArray *statuses) {
-        [_statuses addObjectsFromArray:statuses];
-
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.tableView reloadData];
-    } fail:^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        [MBProgressHUD showErrorWithText:@"加载失败，请检查您的网络连接！"];
-    }];
+    [self.tableView headerBeginRefreshing];
+    
 }
 
 
