@@ -24,17 +24,58 @@
 
 @implementation HomeViewController
 
+-(void) showNewWeiboCount:(int)count{
+    // 1.创建按钮
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.userInteractionEnabled = NO;
+    [btn setBackgroundImage:[UIImage stretchImageWithName:@"timeline_new_status_background.png"] forState:UIControlStateNormal];
+    CGFloat btnWidth = self.view.frame.size.width;
+    CGFloat btnHeight = 44;
+    if (ios_version>=7.0) {
+        btn.frame = CGRectMake(0, 20, btnWidth, btnHeight);
+    }else if(ios_version < 7.0){
+        btn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
+    }
+    
+    // 添加按钮到导航栏后面
+    [self.navigationController.view insertSubview:btn belowSubview:self.navigationController.navigationBar];
+    
+    // 2.设置文字
+    NSString *text = @"没有新的微博";
+    if (count) {
+        text = [NSString stringWithFormat:@"共有%d条微博", count];
+    }
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitle:text forState:UIControlStateNormal];
+    
+    // 3.执行动画
+    [UIView animateWithDuration:0.3 animations:^{
+        // 往下挪
+        btn.transform = CGAffineTransformMakeTranslation(0, btnHeight);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.7 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{ // 往回挪
+            btn.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            [btn removeFromSuperview];
+        }];
+    }];
+}
+
 -(void) loadWeiboDataWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId {
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"正在加载数据……";
     [StatusTool statusesWithSinceId:sinceId maxId:maxId success:^(NSMutableArray *statuses) {
         if (sinceId == nil && maxId == nil) {
             //第一次进入加载数据
             _statuses=statuses;
+            //显示刷新了多少条微博
+            [self showNewWeiboCount:statuses.count];
         }else if(maxId != nil && sinceId == nil){
             //上拉加载更多
            [_statuses addObjectsFromArray:statuses];
         }else{
             //下拉刷新
+            //显示刷新了多少条微博
+            [self showNewWeiboCount:statuses.count];
             [statuses addObjectsFromArray:_statuses];
             _statuses=statuses;
         }
