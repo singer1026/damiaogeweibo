@@ -24,7 +24,7 @@
 
 @implementation HomeViewController
 
--(void) showNewWeiboCount:(int)count{
+-(void) showNewStatusCount:(int)count{
     // 1.创建按钮
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.userInteractionEnabled = NO;
@@ -53,7 +53,8 @@
         // 往下挪
         btn.transform = CGAffineTransformMakeTranslation(0, btnHeight);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.7 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{ // 往回挪
+        [UIView animateWithDuration:0.7 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{
+            // 往回挪
             btn.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             [btn removeFromSuperview];
@@ -61,21 +62,21 @@
     }];
 }
 
--(void) loadWeiboDataWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId {
+-(void) loadStatusDataWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId {
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES].labelText = @"正在加载数据……";
     [StatusTool statusesWithSinceId:sinceId maxId:maxId success:^(NSMutableArray *statuses) {
         if (sinceId == nil && maxId == nil) {
             //第一次进入加载数据
             _statuses=statuses;
             //显示刷新了多少条微博
-            [self showNewWeiboCount:statuses.count];
+            [self showNewStatusCount:statuses.count];
         }else if(maxId != nil && sinceId == nil){
             //上拉加载更多
            [_statuses addObjectsFromArray:statuses];
         }else{
             //下拉刷新
             //显示刷新了多少条微博
-            [self showNewWeiboCount:statuses.count];
+            [self showNewStatusCount:statuses.count];
             [statuses addObjectsFromArray:_statuses];
             _statuses=statuses;
         }
@@ -96,7 +97,7 @@
         Status *first = _statuses[0];
         sinceId = first.idstr;
     }
-    [self loadWeiboDataWithSinceId:sinceId maxId:nil];
+    [self loadStatusDataWithSinceId:sinceId maxId:nil];
 
 }
 
@@ -106,7 +107,7 @@
         NSString *maxId = lastStatus.idstr;
         long long lastMaxid = [maxId longLongValue];
         lastMaxid--;
-        [self loadWeiboDataWithSinceId:nil maxId:[NSString stringWithFormat:@"%lld",lastMaxid]];
+        [self loadStatusDataWithSinceId:nil maxId:[NSString stringWithFormat:@"%lld",lastMaxid]];
     }
     
     

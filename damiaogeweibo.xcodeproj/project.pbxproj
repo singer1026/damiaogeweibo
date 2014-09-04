@@ -20,6 +20,7 @@
 		465687A619B7627A00C0D7D1 /* timeline_retweet_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 465687A219B7627A00C0D7D1 /* timeline_retweet_background.png */; };
 		465687A719B7627A00C0D7D1 /* timeline_retweet_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 465687A319B7627A00C0D7D1 /* timeline_retweet_background@2x.png */; };
 		465EA413199B9DCA00632812 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 465EA412199B9DCA00632812 /* DockItem.m */; };
+		4668449719B89D3900921877 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668449619B89D3900921877 /* StatusCell.m */; };
 		466869AE19B603CF00D27F52 /* avatar_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4668699A19B603CF00D27F52 /* avatar_default.png */; };
 		466869AF19B603CF00D27F52 /* avatar_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4668699B19B603CF00D27F52 /* avatar_default@2x.png */; };
 		466869B019B603CF00D27F52 /* avatar_default_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4668699C19B603CF00D27F52 /* avatar_default_big.png */; };
@@ -244,6 +245,8 @@
 		465687A319B7627A00C0D7D1 /* timeline_retweet_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_retweet_background@2x.png"; sourceTree = "<group>"; };
 		465EA411199B9DCA00632812 /* DockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockItem.h; sourceTree = "<group>"; };
 		465EA412199B9DCA00632812 /* DockItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockItem.m; sourceTree = "<group>"; };
+		4668449519B89D3900921877 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
+		4668449619B89D3900921877 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
 		4668699A19B603CF00D27F52 /* avatar_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_default.png; sourceTree = "<group>"; };
 		4668699B19B603CF00D27F52 /* avatar_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_default@2x.png"; sourceTree = "<group>"; };
 		4668699C19B603CF00D27F52 /* avatar_default_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_default_big.png; sourceTree = "<group>"; };
@@ -547,6 +550,15 @@
 			path = home;
 			sourceTree = "<group>";
 		};
+		4668449419B89D0E00921877 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4668449519B89D3900921877 /* StatusCell.h */,
+				4668449619B89D3900921877 /* StatusCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		4668699919B603CF00D27F52 /* avatar */ = {
 			isa = PBXGroup;
 			children = (
@@ -834,6 +846,7 @@
 		46C0A9B0198FCAD800C99AD9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4668449419B89D0E00921877 /* Cell */,
 				468CF1E11992781A00BA62A4 /* Dock.h */,
 				468CF1E21992781A00BA62A4 /* Dock.m */,
 				465EA411199B9DCA00632812 /* DockItem.h */,
@@ -1294,6 +1307,7 @@
 				46138D7919B229F2009BE421 /* MBProgressHUD.m in Sources */,
 				46D111A619B2359A00040147 /* AFURLConnectionOperation.m in Sources */,
 				4680A9D0199CEDDE00CBF47E /* HomeViewController.m in Sources */,
+				4668449719B89D3900921877 /* StatusCell.m in Sources */,
 				46064FD519B2045C0080EBEE /* OauthViewController.m in Sources */,
 				46CEC479198FAF070084DA0E /* WeiboSDK.h in Sources */,
 				46D111A719B2359A00040147 /* AFXMLRequestOperation.m in Sources */,
