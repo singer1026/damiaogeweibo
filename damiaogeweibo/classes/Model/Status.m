@@ -39,4 +39,46 @@
     }
     return self;
 }
+
+- (void)setSource:(NSString *)source
+{
+    // 解析 <a href="http://app.weibo.com/t/feed/OChwC" rel="nofollow">云中小鸟</a>
+    
+    int startIndex = [source rangeOfString:@">"].location + 1;
+    
+    int endIndex = [source rangeOfString:@"</a>"].location;
+    
+    int len = endIndex - startIndex;
+    
+    source = [source substringWithRange:NSMakeRange(startIndex, len)];
+    
+    _source = [NSString stringWithFormat:@"来自%@", source];
+}
+
+- (NSString *)createdAt
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"EEE MMM d HH:mm:ss Z yyyy";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    
+    NSDate *date = [formatter dateFromString:_createdAt];
+    
+    NSDate *now = [NSDate date];
+    
+    // 比较微博发送时间和当前时间
+    NSTimeInterval delta = [now timeIntervalSinceDate:date];
+    
+    if (delta < 60) { // 1分钟以内
+        return @"刚刚";
+    } else if (delta < 60 * 60) { // 60分钟以内
+        return [NSString stringWithFormat:@"%.f分钟前", delta / 60];
+    } else if (delta < 60 * 60 * 24) { // 24小时内
+        return [NSString stringWithFormat:@"%.f小时前", delta / (60 * 60)];
+    } else {
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm";
+        return [formatter stringFromDate:date];
+}
+
+
+}
 @end

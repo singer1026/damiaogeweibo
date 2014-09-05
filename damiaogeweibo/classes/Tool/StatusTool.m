@@ -5,7 +5,7 @@
 //  Created by Singer on 14-8-31.
 //  Copyright (c) 2014年 Singer. All rights reserved.
 //
-#define kStatusesPath @"statuses/friends_timeline.json"
+#define kStatusesPath @"statuses/home_timeline.json"
 #import "StatusTool.h"
 #import "AccountTool.h"
 #import "Account.h"
@@ -17,11 +17,10 @@
     maxId = maxId==nil?@"0":maxId;
     
     // 创建一个请求对象
-    NSURLRequest *request = [NSURLRequest requestWithPath:kStatusesPath params:@{
-                                                                                 @"since_id" : sinceId,
-                                                                                 @"max_id" : maxId
-                                                                                 }];
-   
+    NSURLRequest *request = [NSURLRequest
+                             requestWithPath:kStatusesPath
+                             params:@{ @"since_id" : sinceId, @"max_id" : maxId }];
+
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         // 1.取出所有的微博数据
         NSArray *array = JSON[@"statuses"];
