@@ -10,7 +10,7 @@
 #import "Status.h"
 #import "User.h"
 #import "IconView.h"
-
+#import "StatusImageListView.h"
 @implementation StatusCellFrame
 - (void)setStatus:(Status *)status
 {
@@ -51,7 +51,9 @@
     if (status.picUrls.count) {
         CGFloat imageX = contentX;
         CGFloat imageY = CGRectGetMaxY(_content) + kCellBorderWidth;
-        _image = CGRectMake(imageX, imageY, kImageWidth, kImageHeight);
+        
+        CGSize imageSize = [StatusImageListView imageWithCount:status.picUrls.count];
+        _image = (CGRect){{imageX, imageY}, imageSize};
     }
     
     // 8.被转发的微博
@@ -79,15 +81,17 @@
         if (status.retweetedStatus.picUrls.count) {
             CGFloat retweetImageX = retweetContentX;
             CGFloat retweetImageY = CGRectGetMaxY(_retweetContent) + kCellBorderWidth;
-            _retweetImage = CGRectMake(retweetImageX, retweetImageY, kImageWidth, kImageHeight);
-            
+
+            CGSize retweetSize = [StatusImageListView imageWithCount:status.retweetedStatus.picUrls.count];
+            _retweetImage = (CGRect){{retweetImageX, retweetImageY}, retweetSize};
             retweetHeight += CGRectGetMaxY(_retweetImage);
+
         } else { // 没有配图
             retweetHeight += CGRectGetMaxY(_retweetContent);
         }
         
         // 4.被转发微博总体的高度
-        _retweet = CGRectMake(retweetX, retweetY, retweetWidth, retweetHeight);
+       _retweet = CGRectMake(retweetX, retweetY, retweetWidth, retweetHeight);
     }
     
     // 9.总高度

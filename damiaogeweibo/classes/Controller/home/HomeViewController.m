@@ -20,7 +20,7 @@
 @interface HomeViewController ()
 {
     // 所有的微博数据
-    NSMutableArray *_statuses;
+//    NSMutableArray *_statuses;
     // 所有的cellFrame数据
     NSMutableArray *_statusCellFrames;
 }
@@ -48,7 +48,7 @@
     //    NSString *urlstr = @"https://api.weibo.com/2/statuses/home_timeline.json";
     //    NSURL *url = [NSURL URLWithString:urlstr];
     //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    _statuses = [NSMutableArray array];
+
     _statusCellFrames = [NSMutableArray array];
     [self.tableView headerBeginRefreshing];
     
@@ -96,22 +96,40 @@
 -(void) loadStatusDataWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId {
 
     [StatusTool statusesWithSinceId:sinceId maxId:maxId success:^(NSMutableArray *statuses) {
+        NSMutableArray *newFrames = [NSMutableArray array];
+        for (Status *s in statuses) {
+            StatusCellFrame *cellFrame = [[StatusCellFrame alloc] init];
+            cellFrame.status = s;
+            [newFrames addObject:cellFrame];
+        }
+        
         if (sinceId == nil && maxId == nil) {
             //第一次进入加载数据
-            _statuses=statuses;
+//            _statuses=statuses;
+            
+            _statusCellFrames = newFrames;
             //显示刷新了多少条微博
             [self showNewStatusCount:statuses.count];
         }else if(maxId != nil && sinceId == nil){
             //上拉加载更多
-           [_statuses addObjectsFromArray:statuses];
+            if (newFrames.count>0) {
+                 [_statusCellFrames addObjectsFromArray:newFrames];
+            }
+           
+//           [_statuses addObjectsFromArray:statuses];
+            
+            
         }else if(sinceId != nil && maxId== nil){
             //下拉刷新
             //显示刷新了多少条微博
             [self showNewStatusCount:statuses.count];
             
+            
             // 1.将旧数据添加到新数据的最后面
-            [statuses addObjectsFromArray:_statuses];
-            _statuses = statuses;
+            [newFrames addObjectsFromArray:_statusCellFrames];
+            _statusCellFrames = newFrames;
+//            [statuses addObjectsFromArray:_statuses];
+//            _statuses = statuses;
         }
         
         [self.tableView headerEndRefreshing];
@@ -126,8 +144,9 @@
 -(void) headerRereshing{
     //加载ID>sinceId的微博
     NSString *sinceId = nil;
-    if (_statuses.count) { // 取出最前面那条微博的id
-        Status *first = _statuses[0];
+    if (_statusCellFrames.count) { // 取出最前面那条微博的id
+        StatusCellFrame *cellFrame = _statusCellFrames[0];
+        Status *first = cellFrame.status;
         sinceId = first.idstr;
     }
     [self loadStatusDataWithSinceId:sinceId maxId:nil];
@@ -135,8 +154,9 @@
 }
 
 -(void)footerRereshing{
-    if (_statuses.count) {
-        Status *lastStatus = _statuses.lastObject;
+    if (_statusCellFrames.count) {
+        StatusCellFrame *lastCellFrame = [_statusCellFrames lastObject];
+        Status *lastStatus = lastCellFrame.status;
         NSString *maxId = lastStatus.idstr;
         long long lastMaxid = [maxId longLongValue];
         lastMaxid--;
@@ -166,7 +186,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return _statuses.count;
+    return _statusCellFrames.count;
 }
 
 #pragma mark 每当有一个cell进入屏幕视野范围内就会被调用 返回当前这行显示的cell
@@ -185,11 +205,11 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     // 在这里取出微博数据，计算cell中所有子控件的frame和cell的高度
-    StatusCellFrame *frame = [[StatusCellFrame alloc] init];
+//    StatusCellFrame *frame = [[StatusCellFrame alloc] init];
+    StatusCellFrame *frame =_statusCellFrames[indexPath.row];
+//    frame.status = frame.status;
     
-    frame.status = _statuses[indexPath.row];
-    
-    [_statusCellFrames addObject:frame];
+//    [_statusCellFrames addObject:frame];
     
     return frame.cellHeight;
 //    return 200;

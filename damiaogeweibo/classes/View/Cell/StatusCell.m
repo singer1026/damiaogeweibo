@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "User.h"
 #import "IconView.h"
+#import "StatusImageListView.h"
 @interface StatusCell ()
 {
     /*
@@ -36,7 +37,7 @@
     UILabel *_content;
     
     // 7.配图
-    UIImageView *_image;
+    StatusImageListView *_image;
     
     /*
      被转发微博的子控件
@@ -51,7 +52,7 @@
     UILabel *_retweetContent;
     
     // 4.配图
-    UIImageView *_retweetImage;
+    StatusImageListView *_retweetImage;
 }
 @end
 
@@ -131,7 +132,7 @@
     [self.contentView addSubview:_content];
     
     // 7.配图
-    _image = [[UIImageView alloc] init];
+    _image = [[StatusImageListView alloc] init];
     _image.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_image];
 }
@@ -162,7 +163,7 @@
     [_retweet addSubview:_retweetContent];
     
     // 4.配图
-    _retweetImage = [[UIImageView alloc] init];
+    _retweetImage = [[StatusImageListView alloc] init];
     _retweetImage.contentMode = UIViewContentModeScaleAspectFit;
     [_retweet addSubview:_retweetImage];
 }
@@ -236,8 +237,10 @@
     _image.frame = statusCellFrame.image;
     if (status.picUrls.count) {
         _image.hidden = NO;
-        NSString *imageURLStr = status.picUrls[0][@"thumbnail_pic"];
-        [_image sd_setImageWithURL:[NSURL URLWithString:imageURLStr]  placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder.png"]  options:SDWebImageLowPriority | SDWebImageRetryFailed];
+//        NSString *imageURLStr = status.picUrls[0][@"thumbnail_pic"];
+//        [_image sd_setImageWithURL:[NSURL URLWithString:imageURLStr]  placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder.png"]  options:SDWebImageLowPriority | SDWebImageRetryFailed];
+        
+        _image.imageUrls = status.picUrls;
     }else{
         _image.hidden = YES;
     }
@@ -266,8 +269,9 @@
         _retweetImage.frame = statusCellFrame.retweetImage;
         
         if (status.retweetedStatus.picUrls.count) {
-            NSString *imageURLStr = status.retweetedStatus.picUrls[0][@"thumbnail_pic"];
-            [_retweetImage sd_setImageWithURL:[NSURL URLWithString:imageURLStr]  placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder.png"]  options:SDWebImageLowPriority | SDWebImageRetryFailed];
+            _retweetImage.imageUrls = status.retweetedStatus.picUrls;
+//            NSString *imageURLStr = status.retweetedStatus.picUrls[0][@"thumbnail_pic"];
+//            [_retweetImage sd_setImageWithURL:[NSURL URLWithString:imageURLStr]  placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder.png"]  options:SDWebImageLowPriority | SDWebImageRetryFailed];
         }
         
     }else{
