@@ -21,16 +21,6 @@
     self.title = @"发微博";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
     
-    
-    
-//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [rightBtn setTitle:@"发送" forState:UIControlStateNormal];
-//    [rightBtn setAllStateBg:@"compose_emotion_table_send.png"];
-//    [rightBtn setBounds:CGRectMake(0, 0, 60, 35)];
-//    [rightBtn addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStyleBordered target:self action:@selector(send)];
 
 }

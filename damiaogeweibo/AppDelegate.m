@@ -21,6 +21,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:kAppKey];
+    
     self.window  = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     NSString *key = (NSString *)kCFBundleVersionKey;
@@ -46,9 +49,6 @@
         
     }
 
-    [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:kAppKey];
-    
     [self.window makeKeyAndVisible];
     return YES;
 }

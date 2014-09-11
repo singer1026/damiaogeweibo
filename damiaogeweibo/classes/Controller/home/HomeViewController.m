@@ -180,7 +180,9 @@
     
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -205,14 +207,9 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     // 在这里取出微博数据，计算cell中所有子控件的frame和cell的高度
-//    StatusCellFrame *frame = [[StatusCellFrame alloc] init];
     StatusCellFrame *frame =_statusCellFrames[indexPath.row];
-//    frame.status = frame.status;
-    
-//    [_statusCellFrames addObject:frame];
-    
     return frame.cellHeight;
-//    return 200;
+
 }
 
 @end
