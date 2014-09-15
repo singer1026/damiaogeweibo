@@ -32,7 +32,8 @@
 {
     [super viewDidLoad];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
+    [self.tableView setBackgroundColor:kGlobalBg];
+     
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
@@ -198,6 +199,8 @@
     StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+        cell.backgroundColor = kGlobalBg;
     }
     
     cell.statusCellFrame = _statusCellFrames[indexPath.row];

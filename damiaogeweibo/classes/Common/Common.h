@@ -59,3 +59,10 @@
 // 配图的尺寸
 #define kImageWidth 120
 #define kImageHeight 120
+
+
+//微博操作条的高度
+#define kStatusOptionBarHeight 40
+
+//tableView 边框的宽度
+#define kTableBorderWidth 5

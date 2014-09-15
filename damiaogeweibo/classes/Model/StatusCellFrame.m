@@ -16,7 +16,8 @@
 {
     _status = status;
     
-    CGFloat cellWidth = [UIScreen mainScreen].bounds.size.width;
+    //一个cell的宽度
+    CGFloat cellWidth = [UIScreen mainScreen].bounds.size.width - 2*kTableBorderWidth;
     
     /*
      微博本身的子控件
@@ -95,7 +96,7 @@
     }
     
     // 9.总高度
-    _cellHeight = kCellBorderWidth;
+    _cellHeight = kCellBorderWidth + kStatusOptionBarHeight;
     if (status.retweetedStatus) { // 有转发
         _cellHeight += CGRectGetMaxY(_retweet);
     } else if (status.picUrls.count) { // 有配图

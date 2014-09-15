@@ -13,6 +13,7 @@
 #import "User.h"
 #import "IconView.h"
 #import "StatusImageListView.h"
+#import "StatusOptionBar.h"
 @interface StatusCell ()
 {
     /*
@@ -142,6 +143,7 @@
 {
     // 1.被转发微博的整体结构
     _retweet = [[UIImageView alloc] init];
+    
     UIImage *retweetImage = [UIImage imageNamed:@"timeline_retweet_background.png"];
     retweetImage = [retweetImage stretchableImageWithLeftCapWidth:retweetImage.size.width * 0.9 topCapHeight:retweetImage.size.height * 0.5];
     _retweet.image = retweetImage;
@@ -171,7 +173,12 @@
 #pragma mark 添加其他
 - (void)addOtherSubviews
 {
-    
+
+    CGFloat y = self.frame.size.height - kStatusOptionBarHeight;
+    CGRect frame = CGRectMake(0, y , self.frame.size.width, kStatusOptionBarHeight);
+    StatusOptionBar *optionBar = [[StatusOptionBar alloc] initWithFrame:frame];
+    optionBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    [self.contentView addSubview:optionBar];
 }
 
 - (void)setStatusCellFrame:(StatusCellFrame *)statusCellFrame
@@ -279,6 +286,15 @@
     }
     
     
+}
+
+
+#pragma mark 重写setFrame方法
+-(void)setFrame:(CGRect)frame{
+    frame.origin.x = kTableBorderWidth;
+    frame.size.width -= kTableBorderWidth*2;
+    
+    [super setFrame:frame];
 }
 
 @end
