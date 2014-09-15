@@ -66,3 +66,9 @@
 
 //tableView 边框的宽度
 #define kTableBorderWidth 5
+
+//tableView 第一个cell的间距
+#define kTableTopBorderWitdh 5
+
+//tableView 每个cell的间距
+#define kTableVeiwCellMargin 5

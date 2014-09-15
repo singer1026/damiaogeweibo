@@ -51,11 +51,12 @@
                 chind.frame = CGRectMake(0, 0, kStatusOneImageWidth, kStatusOneImageHeight);
                 chind.contentMode = UIViewContentModeScaleAspectFit;
             }else{
+                int divide = (imageCount == 4)?2:3;
                 //列数
-                int column = i%3;
+                int column = i%divide;
                 
                 //行数
-                int row = i/3;
+                int row = i/divide;
                 //计算frame
                 int childX = column*(kStatusImageMageMargin+kStatusImageWidth);
                 int childY = row*(kStatusImageMageMargin+kStatusImageHeight);
