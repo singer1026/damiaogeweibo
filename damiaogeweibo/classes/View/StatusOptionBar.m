@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 Singer. All rights reserved.
 //
 #define kBtnTextColor kGetColor(147,147,147)
+#define kBtnTag 99
 #import "StatusOptionBar.h"
 
 @implementation StatusOptionBar
@@ -38,12 +39,41 @@
     return self;
 }
 
+-(void)setStatus:(Status *)status{
+    _status = status;
+    
+    [self setBtnTitleAtIndex:0 placeholder:@"转发" count:status.repostsCount];
+    [self setBtnTitleAtIndex:1 placeholder:@"评论" count:status.commentsCount];
+    [self setBtnTitleAtIndex:2 placeholder:@"赞" count:status.attitudesCount];
+
+}
+
+-(void)setBtnTitleAtIndex:(int)index placeholder:(NSString*)placeholder count:(int)count{
+    UIButton *btn = (UIButton *)[self viewWithTag:kBtnTag+index];
+    
+    if (count == 0) {
+        [btn setTitle:@"转发" forState:UIControlStateNormal];
+    }else{
+        NSString *title=nil;
+        if (count<10000) {
+           title  = [NSString stringWithFormat:@"%d",count];
+        }else{
+            double reslut = count/ 10000.0;
+            title  = [NSString stringWithFormat:@"%.1f万",reslut];
+        }
+       
+        [btn setTitle:title forState:UIControlStateNormal];
+        
+    }
+}
+
 -(void) addBtnWithTitle:(NSString *)title icon:(NSString *)icon index:(int)index bg:(NSString *)bg{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     CGSize size = self.frame.size;
     CGFloat btnWidth = size.width / 3;
     CGFloat btnX = index * btnWidth;
     
+    btn.tag =index+kBtnTag;
     [btn setAllStateBg:bg];
     btn.frame = CGRectMake(btnX, 0, btnWidth, size.height);
     [btn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];

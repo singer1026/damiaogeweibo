@@ -71,4 +71,4 @@
 #define kTableTopBorderWitdh 5
 
 //tableView 每个cell的间距
-#define kTableVeiwCellMargin 5
+#define kTableVeiwCellMargin 20

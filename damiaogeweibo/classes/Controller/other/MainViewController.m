@@ -17,7 +17,7 @@
 
 @interface MainViewController ()
 {
-    UIViewController *_selectedViewController;
+    UINavigationController *_selectedViewController;
 }
 
 @end
@@ -85,9 +85,29 @@
 #pragma mark 重写addChildViewController方法
 -(void)addChildViewController:(UIViewController *)childController{
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:childController];
+    nav.delegate = self;
+    
     [super addChildViewController:nav];
 }
 
+#pragma mark -导航控制器的代理方法
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+ 
+    if (viewController != navigationController.viewControllers[0]) {
+        
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithIcon:@"navigationbar_back.png" target:self actioin:@selector(back)];
+        
+         viewController.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithIcon:@"navigationbar_more.png" target:self actioin:@selector(home)];
+    }
+}
+
+-(void)home{
+    [_selectedViewController popToRootViewControllerAnimated:YES];
+}
+
+-(void)back{
+    [_selectedViewController popViewControllerAnimated:YES];
+}
 
 -(void)createChildViewControllers{
     HomeViewController *home = [[HomeViewController alloc] init];
@@ -136,7 +156,7 @@
 
 -(void)selectControllerAtIndex:(int) index{
     //tabbar切换控制器
-    UIViewController *vc = self.childViewControllers[index];
+    UINavigationController *vc = self.childViewControllers[index];
     if (_selectedViewController  == vc) {
         return ;
     }
@@ -149,16 +169,5 @@
     [self.view addSubview:vc.view];
     _selectedViewController = vc;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -17,10 +17,9 @@
 #import "MJRefresh.h"
 #import "StatusCell.h"
 #import "StatusCellFrame.h"
+#import "StatusDetailViewController.h"
 @interface HomeViewController ()
 {
-    // 所有的微博数据
-//    NSMutableArray *_statuses;
     // 所有的cellFrame数据
     NSMutableArray *_statusCellFrames;
 }
@@ -46,10 +45,6 @@
     self.navigationItem.rightBarButtonItem=[UIBarButtonItem barButtonItemWithIcon:@"navigationbar_pop.png" target:self actioin:@selector(popMenu)];
     
     //请求微博列表数据
-    //    NSString *urlstr = @"https://api.weibo.com/2/statuses/home_timeline.json";
-    //    NSURL *url = [NSURL URLWithString:urlstr];
-    //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-
     _statusCellFrames = [NSMutableArray array];
     [self.tableView headerBeginRefreshing];
     
@@ -106,8 +101,6 @@
         
         if (sinceId == nil && maxId == nil) {
             //第一次进入加载数据
-//            _statuses=statuses;
-            
             _statusCellFrames = newFrames;
             //显示刷新了多少条微博
             [self showNewStatusCount:statuses.count];
@@ -116,9 +109,6 @@
             if (newFrames.count>0) {
                  [_statusCellFrames addObjectsFromArray:newFrames];
             }
-           
-//           [_statuses addObjectsFromArray:statuses];
-            
             
         }else if(sinceId != nil && maxId== nil){
             //下拉刷新
@@ -129,8 +119,7 @@
             // 1.将旧数据添加到新数据的最后面
             [newFrames addObjectsFromArray:_statusCellFrames];
             _statusCellFrames = newFrames;
-//            [statuses addObjectsFromArray:_statuses];
-//            _statuses = statuses;
+            
         }
         
         [self.tableView headerEndRefreshing];
@@ -181,8 +170,12 @@
     
 }
 
+#pragma mark 选择微博跳到微博详情页面
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    StatusDetailViewController *detail = [[StatusDetailViewController alloc] init];
+    StatusCellFrame *scf = _statusCellFrames[indexPath.row];
+    detail.status =scf.status;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 
@@ -195,7 +188,7 @@
 #pragma mark 每当有一个cell进入屏幕视野范围内就会被调用 返回当前这行显示的cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-//    Status *s = _statuses[indexPath.row];
+
     StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
@@ -204,7 +197,6 @@
     }
     
     cell.statusCellFrame = _statusCellFrames[indexPath.row];
-//    [cell.textLabel setText:s.text];
     return cell;
 }
 

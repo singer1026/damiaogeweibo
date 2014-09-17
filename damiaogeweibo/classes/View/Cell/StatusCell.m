@@ -54,6 +54,8 @@
     
     // 4.配图
     StatusImageListView *_retweetImage;
+    
+    StatusOptionBar *_optionBar;
 }
 @end
 
@@ -134,6 +136,7 @@
     
     // 7.配图
     _image = [[StatusImageListView alloc] init];
+    _image.hidden = YES;
     _image.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_image];
 }
@@ -166,6 +169,7 @@
     
     // 4.配图
     _retweetImage = [[StatusImageListView alloc] init];
+    _retweetImage.hidden = YES;
     _retweetImage.contentMode = UIViewContentModeScaleAspectFit;
     [_retweet addSubview:_retweetImage];
 }
@@ -176,9 +180,11 @@
 
     CGFloat y = self.frame.size.height - kStatusOptionBarHeight;
     CGRect frame = CGRectMake(0, y , self.frame.size.width, kStatusOptionBarHeight);
-    StatusOptionBar *optionBar = [[StatusOptionBar alloc] initWithFrame:frame];
-    optionBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    [self.contentView addSubview:optionBar];
+    _optionBar = [[StatusOptionBar alloc] initWithFrame:frame];
+    
+    
+    _optionBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    [self.contentView addSubview:_optionBar];
 }
 
 - (void)setStatusCellFrame:(StatusCellFrame *)statusCellFrame
@@ -214,11 +220,9 @@
    
     
     // 4.时间
-//    _time.frame = statusCellFrame.time;
     _time.text = status.createdAt;
     
     // 5.来源
-//    _source.frame = statusCellFrame.source;
     _source.text = status.source;
     
     /*
@@ -244,8 +248,6 @@
     _image.frame = statusCellFrame.image;
     if (status.picUrls.count) {
         _image.hidden = NO;
-//        NSString *imageURLStr = status.picUrls[0][@"thumbnail_pic"];
-//        [_image sd_setImageWithURL:[NSURL URLWithString:imageURLStr]  placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder.png"]  options:SDWebImageLowPriority | SDWebImageRetryFailed];
         
         _image.imageUrls = status.picUrls;
     }else{
@@ -277,15 +279,13 @@
         
         if (status.retweetedStatus.picUrls.count) {
             _retweetImage.imageUrls = status.retweetedStatus.picUrls;
-//            NSString *imageURLStr = status.retweetedStatus.picUrls[0][@"thumbnail_pic"];
-//            [_retweetImage sd_setImageWithURL:[NSURL URLWithString:imageURLStr]  placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder.png"]  options:SDWebImageLowPriority | SDWebImageRetryFailed];
         }
         
     }else{
         _retweet.hidden = YES;
     }
     
-    
+    [_optionBar setStatus:self.statusCellFrame.status];
 }
 
 
