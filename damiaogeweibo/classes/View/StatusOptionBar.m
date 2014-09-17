@@ -50,15 +50,17 @@
 
 -(void)setBtnTitleAtIndex:(int)index placeholder:(NSString*)placeholder count:(int)count{
     UIButton *btn = (UIButton *)[self viewWithTag:kBtnTag+index];
-    
     if (count == 0) {
         [btn setTitle:@"转发" forState:UIControlStateNormal];
     }else{
         NSString *title=nil;
         if (count<10000) {
            title  = [NSString stringWithFormat:@"%d",count];
-        }else{
-            double reslut = count/ 10000.0;
+        }else if(count % 10000 == 0){
+            title  = [NSString stringWithFormat:@"%d万",count/10000];
+        }
+        else{
+            double reslut = (count / 1000.0) * 0.1;
             title  = [NSString stringWithFormat:@"%.1f万",reslut];
         }
        

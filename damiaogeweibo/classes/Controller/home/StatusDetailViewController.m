@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.title = @"微博正文";
 }
 

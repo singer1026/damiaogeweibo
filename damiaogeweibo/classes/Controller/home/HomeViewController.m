@@ -30,9 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:kGlobalBg];
-     
+    
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
