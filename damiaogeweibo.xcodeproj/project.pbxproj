@@ -254,6 +254,8 @@
 		46DD128D19C9B15300B34F7A /* navigationbar_more_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DD128519C9B15300B34F7A /* navigationbar_more_highlighted@2x.png */; };
 		46DD128E19C9B15300B34F7A /* navigationbar_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DD128619C9B15300B34F7A /* navigationbar_more.png */; };
 		46DD128F19C9B15300B34F7A /* navigationbar_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DD128719C9B15300B34F7A /* navigationbar_more@2x.png */; };
+		46DD129219C9D7F500B34F7A /* SlideNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DD129119C9D7F500B34F7A /* SlideNavViewController.m */; };
+		46DD129419C9E01600B34F7A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DD129319C9E01600B34F7A /* QuartzCore.framework */; };
 		46E0527F19B9BE280006B2BD /* StatusCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E0527E19B9BE280006B2BD /* StatusCellFrame.m */; };
 		46E0528419B9CBBA0006B2BD /* common_icon_membership.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E0528219B9CBBA0006B2BD /* common_icon_membership.png */; };
 		46E0528519B9CBBA0006B2BD /* common_icon_membership@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E0528319B9CBBA0006B2BD /* common_icon_membership@2x.png */; };
@@ -589,6 +591,9 @@
 		46DD128519C9B15300B34F7A /* navigationbar_more_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_more_highlighted@2x.png"; sourceTree = "<group>"; };
 		46DD128619C9B15300B34F7A /* navigationbar_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationbar_more.png; sourceTree = "<group>"; };
 		46DD128719C9B15300B34F7A /* navigationbar_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_more@2x.png"; sourceTree = "<group>"; };
+		46DD129019C9D7F500B34F7A /* SlideNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavViewController.h; sourceTree = "<group>"; };
+		46DD129119C9D7F500B34F7A /* SlideNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavViewController.m; sourceTree = "<group>"; };
+		46DD129319C9E01600B34F7A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		46E0527D19B9BE280006B2BD /* StatusCellFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCellFrame.h; sourceTree = "<group>"; };
 		46E0527E19B9BE280006B2BD /* StatusCellFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCellFrame.m; sourceTree = "<group>"; };
 		46E0528119B9BEF60006B2BD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -606,6 +611,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46DD129419C9E01600B34F7A /* QuartzCore.framework in Frameworks */,
 				46CEC440198FADC60084DA0E /* CoreGraphics.framework in Frameworks */,
 				46CEC442198FADC60084DA0E /* UIKit.framework in Frameworks */,
 				46CEC43E198FADC60084DA0E /* Foundation.framework in Frameworks */,
@@ -789,6 +795,8 @@
 				4680A9C9199CED0500CBF47E /* MainViewController.m */,
 				4680A9CA199CED0500CBF47E /* NewFeatureViewController.h */,
 				4680A9CB199CED0500CBF47E /* NewFeatureViewController.m */,
+				46DD129019C9D7F500B34F7A /* SlideNavViewController.h */,
+				46DD129119C9D7F500B34F7A /* SlideNavViewController.m */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -1054,6 +1062,7 @@
 		46CEC43C198FADC60084DA0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46DD129319C9E01600B34F7A /* QuartzCore.framework */,
 				46CEC43D198FADC60084DA0E /* Foundation.framework */,
 				46CEC43F198FADC60084DA0E /* CoreGraphics.framework */,
 				46CEC441198FADC60084DA0E /* UIKit.framework */,
@@ -1520,6 +1529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46DD129219C9D7F500B34F7A /* SlideNavViewController.m in Sources */,
 				46D111A119B2359A00040147 /* AFHTTPRequestOperation.m in Sources */,
 				468686B619A22B9600D5F58B /* SendWeiboViewController.m in Sources */,
 				4689F6CF199100A80015DA41 /* UIImage+MultiFormat.m in Sources */,

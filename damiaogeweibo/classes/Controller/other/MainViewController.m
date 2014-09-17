@@ -17,6 +17,7 @@
 #import "ProfileViewController.h"
 #import "DiscoverViewController.h"
 #import "MoreViewController.h"
+#import "SlideNavViewController.h"
 
 
 @interface MainViewController ()
@@ -88,7 +89,7 @@
 
 #pragma mark 重写addChildViewController方法
 -(void)addChildViewController:(UIViewController *)childController{
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:childController];
+    SlideNavViewController *nav = [[SlideNavViewController alloc] initWithRootViewController:childController];
     nav.delegate = self;
     
     [super addChildViewController:nav];
