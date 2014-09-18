@@ -81,6 +81,7 @@
     // 1.默认背景
     UIImageView *bg = [[UIImageView alloc] init];
     bg.image = [UIImage stretchImageWithName:@"common_card_background.png"];
+    self.backgroundColor = [UIColor clearColor];
     self.backgroundView = bg;
     
     // 2.选中背景
@@ -270,5 +271,13 @@
     
 }
 
+#pragma mark 重写setFrame方法
+-(void)setFrame:(CGRect)frame{
+    frame.origin.x = kTableBorderWidth;
+    frame.origin.y += kTableTopBorderWitdh;
+    frame.size.width -= kTableBorderWidth*2;
+    frame.size.height -=kTableVeiwCellMargin;
+    [super setFrame:frame];
+}
 
 @end

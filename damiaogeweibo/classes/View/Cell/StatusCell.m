@@ -51,13 +51,5 @@
 }
 
 
-#pragma mark 重写setFrame方法
--(void)setFrame:(CGRect)frame{
-    frame.origin.x = kTableBorderWidth;
-    frame.origin.y += kTableTopBorderWitdh;
-    frame.size.width -= kTableBorderWidth*2;
-    frame.size.height -=kTableVeiwCellMargin;
-    [super setFrame:frame];
-}
 
 @end
