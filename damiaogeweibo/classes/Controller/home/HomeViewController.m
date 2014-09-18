@@ -26,6 +26,11 @@
 @end
 
 @implementation HomeViewController
+#pragma mark 当控制器的view被显示到窗口中就会调用
+// 取出父类在view显示出来后执行的操作
+// 父类在view显示的时候，会显示一下滚动条的位置
+- (void)viewDidAppear:(BOOL)animated
+{}
 
 - (void)viewDidLoad
 {
@@ -197,7 +202,7 @@
         cell.backgroundColor = kGlobalBg;
     }
     
-    cell.statusCellFrame = _statusCellFrames[indexPath.row];
+    cell.baseFrame = _statusCellFrames[indexPath.row];
     return cell;
 }
 

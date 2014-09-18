@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Status.h"
 
-@interface StatusDetailViewController : UIViewController
+@interface StatusDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) Status *status;
 @end
