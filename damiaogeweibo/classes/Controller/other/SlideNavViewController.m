@@ -15,6 +15,7 @@
 {
     UIImageView *_imageView;
     UIView *_cover;
+    NSMutableArray *_cutImages;
 }
 @end
 
@@ -25,6 +26,7 @@
 {
     [super viewDidLoad];
     
+    _cutImages = [NSMutableArray array];
     //添加手势监听
     [self.view addGestureRecognizer: [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragView:)]];
     
@@ -45,22 +47,25 @@
     //截图
     
     //开启上下文
-    UIGraphicsBeginImageContext(cutView.frame.size);
+//    UIGraphicsBeginImageContext(cutView.frame.size);
+    UIGraphicsBeginImageContextWithOptions(cutView.frame.size, YES, 0.0);
     
     //把cutView渲染到上下文中
     [cutView.layer renderInContext:UIGraphicsGetCurrentContext()];
     
+    UIImage *image  = UIGraphicsGetImageFromCurrentImageContext();
+    [_cutImages addObject:image];
     //取出image
-    _imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+//    _imageView.image =
     
     //结束上下文
     UIGraphicsEndImageContext();
 }
 
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    
-    [self cut];
-    
+    if (self.viewControllers.count >= 1) {
+        [self cut];
+    }
     
     [super pushViewController:viewController animated:YES];
 
@@ -97,6 +102,8 @@
     // 添加imageview 和 cover到window中
     [self.view.window insertSubview:_imageView atIndex:0];
     [self.view.window insertSubview:_cover aboveSubview:_imageView];
+    
+    _imageView.image = _cutImages.lastObject;
 }
 
 #pragma mark 结束拖动
@@ -142,6 +149,7 @@
             
             // 移除栈顶控制器
             [self popViewControllerAnimated:NO];
+            [_cutImages removeLastObject];
         }];
     }
 }

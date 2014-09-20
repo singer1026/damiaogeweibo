@@ -43,7 +43,7 @@
      被转发微博的子控件
      */
     // 1.被转发微博的整体结构
-    UIImageView *_retweet;
+//    UIImageView *_retweet;
     
     // 2.昵称
     UILabel *_retweetScreenName;
@@ -262,6 +262,7 @@
         _retweetImage.frame = baseFrame.retweetImage;
         
         if (status.retweetedStatus.picUrls.count) {
+            _retweetImage.hidden = NO;
             _retweetImage.imageUrls = status.retweetedStatus.picUrls;
         }
         

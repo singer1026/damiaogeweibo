@@ -233,6 +233,7 @@
 		4689F6D2199100A80015DA41 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689F6C1199100A80015DA41 /* UIImageView+WebCache.m */; };
 		4689F6D3199100A80015DA41 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689F6C3199100A80015DA41 /* UIView+WebCacheOperation.m */; };
 		468CF1E31992781A00BA62A4 /* Dock.m in Sources */ = {isa = PBXBuildFile; fileRef = 468CF1E21992781A00BA62A4 /* Dock.m */; };
+		46BA573B19CD1EF100C79873 /* StatusRetweetOptionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BA573A19CD1EF100C79873 /* StatusRetweetOptionBar.m */; };
 		46CEC43E198FADC60084DA0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CEC43D198FADC60084DA0E /* Foundation.framework */; };
 		46CEC440198FADC60084DA0E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CEC43F198FADC60084DA0E /* CoreGraphics.framework */; };
 		46CEC442198FADC60084DA0E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CEC441198FADC60084DA0E /* UIKit.framework */; };
@@ -632,6 +633,8 @@
 		468CF1E11992781A00BA62A4 /* Dock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dock.h; sourceTree = "<group>"; };
 		468CF1E21992781A00BA62A4 /* Dock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dock.m; sourceTree = "<group>"; };
 		468CF1E41992856A00BA62A4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		46BA573919CD1EF100C79873 /* StatusRetweetOptionBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusRetweetOptionBar.h; sourceTree = "<group>"; };
+		46BA573A19CD1EF100C79873 /* StatusRetweetOptionBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusRetweetOptionBar.m; sourceTree = "<group>"; };
 		46CEC43A198FADC60084DA0E /* damiaogeweibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = damiaogeweibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CEC43D198FADC60084DA0E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		46CEC43F198FADC60084DA0E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1277,6 +1280,8 @@
 				463E182519BA7E710005D554 /* StatusImageListView.m */,
 				4636284519BF32FA00C7D9D5 /* StatusOptionBar.h */,
 				4636284619BF32FA00C7D9D5 /* StatusOptionBar.m */,
+				46BA573919CD1EF100C79873 /* StatusRetweetOptionBar.h */,
+				46BA573A19CD1EF100C79873 /* StatusRetweetOptionBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1886,6 +1891,7 @@
 				4679505919CB2E560072809F /* BaseCell.m in Sources */,
 				466869C919B6244F00D27F52 /* MBProgressHUD+Show.m in Sources */,
 				4689F6A01991009F0015DA41 /* UIScrollView+MJRefresh.m in Sources */,
+				46BA573B19CD1EF100C79873 /* StatusRetweetOptionBar.m in Sources */,
 				46DD127F19C9AA4600B34F7A /* StatusDetailViewController.m in Sources */,
 				4689F6C5199100A80015DA41 /* NSData+ImageContentType.m in Sources */,
 				4689F6CE199100A80015DA41 /* UIImage+GIF.m in Sources */,

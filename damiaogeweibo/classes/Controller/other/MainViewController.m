@@ -19,17 +19,16 @@
 #import "MoreViewController.h"
 #import "SlideNavViewController.h"
 
-
 @interface MainViewController ()
 {
-    UINavigationController *_selectedViewController;
+    
     Dock *_dock;
 }
 
 @end
 
 @implementation MainViewController
-
+singleton_implementation(MainViewController)
 
 - (void)viewDidLoad
 {
@@ -190,7 +189,7 @@
     
     //监听dockItem的点击
     _dock.itemClickBlock = ^(int index){
-        [self selectControllerAtIndex:index];
+        [[MainViewController sharedMainViewController] selectControllerAtIndex:index];
     };
 }
 

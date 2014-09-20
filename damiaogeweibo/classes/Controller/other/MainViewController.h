@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Singleton.h"
 @interface MainViewController : UIViewController<UINavigationControllerDelegate>
 
+singleton_interface(MainViewController)
+
+@property(nonatomic,readonly,strong) UINavigationController* selectedViewController;
 @end

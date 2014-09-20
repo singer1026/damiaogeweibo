@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 @class Status;
 @interface BaseFrame : NSObject
+{
+    CGFloat _cellHeight;
+    CGRect _retweet;
+}
 /*
  要计算的微博数据
  */

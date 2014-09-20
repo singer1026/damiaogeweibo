@@ -10,5 +10,10 @@
 #import "BaseFrame.h"
 
 @interface BaseCell : UITableViewCell
+{
+    UIImageView *_retweet;
+    BaseFrame *_baseFrame;
+    
+}
 @property (nonatomic, strong) BaseFrame *baseFrame;
 @end

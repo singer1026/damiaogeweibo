@@ -31,6 +31,8 @@
     _statusDetailCellFrame.status = self.status;
     
     UITableView *tableView = [[UITableView alloc] init];
+    tableView.allowsSelection = NO;
+    
     tableView.backgroundColor = kGlobalBg;
     tableView.delegate = self;
     tableView.dataSource = self;

@@ -16,5 +16,8 @@
 - (void)setStatus:(Status *)status
 {
     [super setStatus:status];
+    
+    _cellHeight += kStatusOptionBarHeight;
+    
 }
 @end

@@ -98,7 +98,7 @@
     }
     
     // 9.总高度
-    _cellHeight = kCellBorderWidth + kStatusOptionBarHeight + kTableVeiwCellMargin;
+    _cellHeight = kCellBorderWidth  + kTableVeiwCellMargin;
     if (status.retweetedStatus) { // 有转发
         _cellHeight += CGRectGetMaxY(_retweet);
     } else if (status.picUrls.count) { // 有配图

@@ -7,7 +7,13 @@
 //
 
 #import "StatusDetailCellFrame.h"
-
+#import "Status.h"
 @implementation StatusDetailCellFrame
-
+-(void)setStatus:(Status *)status{
+    [super setStatus:status];
+    if (self.status.retweetedStatus) {
+        _retweet.size.height+=kStatusOptionBarHeight;
+        _cellHeight += kStatusOptionBarHeight;
+    }
+}
 @end
