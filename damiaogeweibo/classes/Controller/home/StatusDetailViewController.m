@@ -15,6 +15,7 @@
 #import "StatusDetailCellFrame.h"
 #import "StatusDetailTitileView.h"
 #import "StatusTool.h"
+#import "MJRefresh.h"
 
 @interface StatusDetailViewController ()
 {
@@ -35,7 +36,12 @@
     [self createSubviews];
     
     [self loadNewData];
+    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     
+}
+
+-(void) headerRereshing{
+    [self loadNewData];
 }
 
 #pragma mark 加载最新的微博数据
@@ -46,12 +52,14 @@
        _titileView.status = status;
        
        //修改微博列表的status数据
-       _statusDetailCellFrame.status.repostsCount = status.repostsCount;
-       _statusDetailCellFrame.status.commentsCount = status.commentsCount;
-       _statusDetailCellFrame.status.attitudesCount = status.attitudesCount;
+       [_statusDetailCellFrame.status update:status];
        
+       [_tableView headerEndRefreshing];
        [_tableView reloadData];
-   } fail:nil];
+       
+   } fail:^{
+       [_tableView headerEndRefreshing];
+   }];
 }
 
 

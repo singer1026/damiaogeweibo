@@ -69,16 +69,25 @@
     NSTimeInterval delta = [now timeIntervalSinceDate:date];
     
     if (delta < 60) { // 1分钟以内
-        return @"刚刚";
+       return @"刚刚";
     } else if (delta < 60 * 60) { // 60分钟以内
-        return [NSString stringWithFormat:@"%.f分钟前", delta / 60];
+       return [NSString stringWithFormat:@"%.f分钟前", delta / 60];
     } else if (delta < 60 * 60 * 24) { // 24小时内
         return [NSString stringWithFormat:@"%.f小时前", delta / (60 * 60)];
     } else {
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm";
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm";
         return [formatter stringFromDate:date];
+    }
 }
 
+-(void)update:(Status *)other{
+    self.repostsCount = other.repostsCount;
+    self.commentsCount = other.commentsCount;
+    self.attitudesCount = other.attitudesCount;
+    
+    self.retweetedStatus.repostsCount = other.retweetedStatus.repostsCount;
+    self.retweetedStatus.commentsCount = other.retweetedStatus.commentsCount;
+    self.retweetedStatus.attitudesCount = other.retweetedStatus.attitudesCount;
 
 }
 @end

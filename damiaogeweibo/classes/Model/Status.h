@@ -39,4 +39,5 @@
 
 @property (nonatomic, strong) User *user; // 微博发送者
 - (id)initWithDict:(NSDictionary *)dict;
+- (void)update:(Status *)other;
 @end
