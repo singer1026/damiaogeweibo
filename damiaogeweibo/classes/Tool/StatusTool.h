@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Status.h"
 
 @interface StatusTool : NSObject
-+ (void)statusesWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *))success fail:(void (^)())fail;
++ (void)statusesWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *statuses))success fail:(void (^)())fail;
 
++(void)statusWithId:(NSString*)idstr success:(void (^)(Status *status))success fail:(void (^)())fail;
 @end

@@ -10,12 +10,12 @@
 
 @implementation Account
 -(id)initWithCoder:(NSCoder *)decoder{
-    if (self == [super init]) {
-        self.accessToken = [decoder decodeObjectForKey:kAccessToken];
-        self.uid = [decoder decodeObjectForKey:kUid];
-        self.screenName = [decoder decodeObjectForKey:@"screen_name"];
+    
+    if (self = [super init]) {
+        _accessToken = [decoder decodeObjectForKey:kAccessToken];
+        _uid = [decoder decodeObjectForKey:kUid];
+        _screenName = [decoder decodeObjectForKey:@"screen_name"];
     }
-
     return self;
 }
 

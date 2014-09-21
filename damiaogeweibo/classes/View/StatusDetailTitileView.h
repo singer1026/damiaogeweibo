@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Status.h"
 @interface StatusDetailTitileView : UIView
-
+@property (strong, nonatomic)  Status* status;
 @end

@@ -6,15 +6,21 @@
 //  Copyright (c) 2014年 Singer. All rights reserved.
 //
 #define kOptionHeight 44
+#define kTitleViewHeight 50
+
 #import "StatusDetailViewController.h"
 #import "StatusCell.h"
 #import "StatusCellFrame.h"
 #import "StatusDetailCell.h"
 #import "StatusDetailCellFrame.h"
+#import "StatusDetailTitileView.h"
+#import "StatusTool.h"
 
 @interface StatusDetailViewController ()
 {
     StatusDetailCellFrame *_statusDetailCellFrame;
+    StatusDetailTitileView *_titileView;
+    UITableView *_tableView;
 }
 @end
 
@@ -26,19 +32,43 @@
 
     self.title = @"微博正文";
     
+    [self createSubviews];
+    
+    [self loadNewData];
+    
+}
+
+#pragma mark 加载最新的微博数据
+-(void)loadNewData{
+    
+   [StatusTool statusWithId:_status.idstr success:^(Status *status) {
+       _status = status;
+       _titileView.status = status;
+       
+       //修改微博列表的status数据
+       _statusDetailCellFrame.status.repostsCount = status.repostsCount;
+       _statusDetailCellFrame.status.commentsCount = status.commentsCount;
+       _statusDetailCellFrame.status.attitudesCount = status.attitudesCount;
+       
+       [_tableView reloadData];
+   } fail:nil];
+}
+
+
+-(void)createSubviews{
     CGSize size = self.view.frame.size;
     _statusDetailCellFrame = [[StatusDetailCellFrame alloc] init];
     _statusDetailCellFrame.status = self.status;
+
+    _tableView = [[UITableView alloc] init];
+    _tableView.allowsSelection = NO;
     
-    UITableView *tableView = [[UITableView alloc] init];
-    tableView.allowsSelection = NO;
-    
-    tableView.backgroundColor = kGlobalBg;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    tableView.frame = CGRectMake(0, 0, size.width, size.height-kOptionHeight);
-    [self.view addSubview:tableView];
+    _tableView.backgroundColor = kGlobalBg;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    _tableView.frame = CGRectMake(0, 0, size.width, size.height-kOptionHeight);
+    [self.view addSubview:_tableView];
     
     
     //评论操作条
@@ -46,10 +76,7 @@
     option.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     option.frame = CGRectMake(0, size.height-kOptionHeight, size.width, kOptionHeight);
     [self.view addSubview:option];
-    
 }
-
-
 
 #pragma mark 每当有一个cell进入屏幕视野范围内就会被调用 返回当前这行显示的cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -93,8 +120,17 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view  = [[UIView alloc]init];
-    return view;
+    
+    if (section == 1) {
+        if (_titileView == nil) {
+            CGRect frame = CGRectMake(0, 0, tableView.frame.size.width, kTitleViewHeight);
+            _titileView = [[StatusDetailTitileView alloc] initWithFrame:frame];
+            _titileView.status = self.status;
+        }
+        return _titileView;
+    }
+    
+    return nil;
 }
 
 
@@ -102,7 +138,7 @@
     if (section == 0) {
         return 0;
     }else{
-        return 50;
+        return kTitleViewHeight;
     }
 }
 
