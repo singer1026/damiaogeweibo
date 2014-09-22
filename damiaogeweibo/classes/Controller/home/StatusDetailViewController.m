@@ -16,12 +16,16 @@
 #import "StatusDetailTitileView.h"
 #import "StatusTool.h"
 #import "MJRefresh.h"
+#import "CommentCellFrame.h"
+#import "CommentCell.h"
 
 @interface StatusDetailViewController ()
 {
     StatusDetailCellFrame *_statusDetailCellFrame;
     StatusDetailTitileView *_titileView;
     UITableView *_tableView;
+    
+    NSMutableArray *_commentCellFrames;
 }
 @end
 
@@ -33,19 +37,22 @@
 
     self.title = @"微博正文";
     
+    
     [self createSubviews];
     
-    [self loadNewData];
+    [self loadNewStatusData];
+    
+    [self loadNewCommentsData];
     [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     
 }
 
 -(void) headerRereshing{
-    [self loadNewData];
+    [self loadNewStatusData];
 }
 
 #pragma mark 加载最新的微博数据
--(void)loadNewData{
+-(void)loadNewStatusData{
     
    [StatusTool statusWithId:_status.idstr success:^(Status *status) {
        _status = status;
@@ -62,6 +69,32 @@
    }];
 }
 
+#pragma mark 加载最新的评论列表数据
+-(void)loadNewCommentsData{
+    _commentCellFrames = [NSMutableArray array];
+    [StatusTool commentsWithId:_status.idstr sinceId:nil maxId:nil success:^(NSMutableArray *comments) {
+        
+        //计算最新的评论数据的Frame
+        NSMutableArray *newFrames = [NSMutableArray array];
+        for (Comment *c in comments) {
+            CommentCellFrame *f = [[CommentCellFrame alloc]init];
+            f.comment = c;
+            [newFrames addObject:f];
+        }
+        
+        //先将就数据添加到新数据的后面
+        [newFrames addObjectsFromArray:_commentCellFrames];
+        
+        //设置当前所有数据
+        _commentCellFrames = newFrames;
+        
+        [_tableView reloadData];
+        
+    } fail:^{
+        
+    }];
+}
+
 
 -(void)createSubviews{
     CGSize size = self.view.frame.size;
@@ -69,6 +102,7 @@
     _statusDetailCellFrame.status = self.status;
 
     _tableView = [[UITableView alloc] init];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.allowsSelection = NO;
     
     _tableView.backgroundColor = kGlobalBg;
@@ -109,18 +143,20 @@
     }else{
         //评论，转发Cell
         //用static 只会初始化一次
-        static NSString *ID2 = @"UITableViewCell";
+        static NSString *ID2 = @"CommentCell";
         //拿到一个标示符先去缓存池中查找对应的cell
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID2];
+        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID2];
         
         //如果缓存池中没有，才需要传入一个标识创建新的cell
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID2];
+            cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID2];
+            cell.myTableView = tableView;
         }
         
-        
-        //覆盖数据
-        cell.textLabel.text = @"hfsdhfask";
+         //覆盖数据
+        CommentCellFrame *cf= _commentCellFrames[indexPath.row];
+        cell.commentCellFrame = cf;
+        cell.indexPaath = indexPath;
         return cell;
         
     }
@@ -153,15 +189,18 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return _statusDetailCellFrame.cellHeight;
+    }else{
+        CommentCellFrame *cf =_commentCellFrames[indexPath.row];
+        return cf.cellHeight;
     }
-    return 44;
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
         return 1;
     }else{
-        return 20;
+        return _commentCellFrames.count;
     }
     
 }

@@ -7,10 +7,13 @@
 //
 #define kStatusesPath @"statuses/home_timeline.json"
 #define kStatusPath @"statuses/show.json"
+#define kCommentsPath @"comments/show.json"
+
 #import "StatusTool.h"
 #import "AccountTool.h"
 #import "Account.h"
 #import "Status.h"
+#import "Comment.h"
 @implementation StatusTool
 
 
@@ -25,18 +28,19 @@
                              params:@{ @"since_id" : sinceId, @"max_id" : maxId }];
 
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        // 1.取出所有的微博数据
-        NSArray *array = JSON[@"statuses"];
         
-        // 2.解析数据为模型(每个dict都代表一条微博)
-        NSMutableArray *statuses = [NSMutableArray array];
-        for (NSDictionary *dict in array) {
-            Status *s = [[Status alloc] initWithDict:dict];
-            [statuses addObject:s];
-        }
-        
-        // 3.回调
+        // 回调
         if (success) {
+            // 1.取出所有的微博数据
+            NSArray *array = JSON[@"statuses"];
+            
+            // 2.解析数据为模型(每个dict都代表一条微博)
+            NSMutableArray *statuses = [NSMutableArray array];
+            for (NSDictionary *dict in array) {
+                Status *s = [[Status alloc] initWithDict:dict];
+                [statuses addObject:s];
+            }
+            
             success(statuses);
         }
         
@@ -61,6 +65,40 @@
             success(status);
         }
        
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        if (fail) {
+            fail();
+        }
+    }];
+    
+    [op start];
+}
+
++(void)commentsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *))success fail:(void (^)())fail{
+    sinceId = sinceId==nil?@"0":sinceId;
+    maxId = maxId==nil?@"0":maxId;
+    
+    
+    // 创建一个请求对象
+    NSURLRequest *request = [NSURLRequest
+                             requestWithPath:kCommentsPath
+                             params:@{ @"since_id" : sinceId, @"max_id" : maxId ,@"id" : idstr}];
+    
+    AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        if (success) {
+            // 1.取出所有的微博数据
+            NSArray *commentArray = JSON[@"comments"];
+            NSMutableArray *comments = [NSMutableArray array];
+            for (NSDictionary *dict in commentArray) {
+                Comment *comment = [[Comment alloc]initWithDict:dict];
+                [comments addObject:comment];
+            }
+            
+            success(comments);
+        }
+        
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         if (fail) {

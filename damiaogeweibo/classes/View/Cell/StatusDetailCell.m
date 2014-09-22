@@ -56,6 +56,8 @@
     _option.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [_retweet addSubview:_option];
 }
+
+
 -(void)setBaseFrame:(BaseFrame *)baseFrame{
     [super setBaseFrame:baseFrame];
     _option.status = baseFrame.status.retweetedStatus;

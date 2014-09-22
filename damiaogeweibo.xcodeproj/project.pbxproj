@@ -13,6 +13,10 @@
 		4606E95819B378E2009B13BB /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 4606E95719B378E2009B13BB /* Status.m */; };
 		4606E95B19B37913009B13BB /* StatusTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4606E95A19B37913009B13BB /* StatusTool.m */; };
 		46138D7919B229F2009BE421 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46138D7819B229F2009BE421 /* MBProgressHUD.m */; };
+		4619BE8719D0444C00A7FEE4 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4619BE8619D0444C00A7FEE4 /* Comment.m */; };
+		4619BE8A19D045BD00A7FEE4 /* BaseTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4619BE8919D045BD00A7FEE4 /* BaseTextModel.m */; };
+		4619BE8D19D04B2300A7FEE4 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4619BE8C19D04B2300A7FEE4 /* CommentCell.m */; };
+		4619BE9319D04C9C00A7FEE4 /* CommentCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4619BE9219D04C9C00A7FEE4 /* CommentCellFrame.m */; };
 		46245826199261C30024E55C /* NSString+file.m in Sources */ = {isa = PBXBuildFile; fileRef = 46245825199261C30024E55C /* NSString+file.m */; };
 		4636284719BF32FA00C7D9D5 /* StatusOptionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4636284619BF32FA00C7D9D5 /* StatusOptionBar.m */; };
 		4636286919BF356D00C7D9D5 /* timeline_card_bottom_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 4636284819BF356D00C7D9D5 /* timeline_card_bottom_line.png */; };
@@ -363,6 +367,14 @@
 		4606E95A19B37913009B13BB /* StatusTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusTool.m; sourceTree = "<group>"; };
 		46138D7719B229F2009BE421 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		46138D7819B229F2009BE421 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		4619BE8519D0444C00A7FEE4 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		4619BE8619D0444C00A7FEE4 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		4619BE8819D045BD00A7FEE4 /* BaseTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTextModel.h; sourceTree = "<group>"; };
+		4619BE8919D045BD00A7FEE4 /* BaseTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTextModel.m; sourceTree = "<group>"; };
+		4619BE8B19D04B2300A7FEE4 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		4619BE8C19D04B2300A7FEE4 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		4619BE9119D04C9C00A7FEE4 /* CommentCellFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCellFrame.h; sourceTree = "<group>"; };
+		4619BE9219D04C9C00A7FEE4 /* CommentCellFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCellFrame.m; sourceTree = "<group>"; };
 		46245824199261C30024E55C /* NSString+file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+file.h"; sourceTree = "<group>"; };
 		46245825199261C30024E55C /* NSString+file.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+file.m"; sourceTree = "<group>"; };
 		4636284519BF32FA00C7D9D5 /* StatusOptionBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusOptionBar.h; sourceTree = "<group>"; };
@@ -868,6 +880,8 @@
 				4679505819CB2E560072809F /* BaseCell.m */,
 				4679505D19CB34E30072809F /* StatusDetailCell.h */,
 				4679505E19CB34E30072809F /* StatusDetailCell.m */,
+				4619BE8B19D04B2300A7FEE4 /* CommentCell.h */,
+				4619BE8C19D04B2300A7FEE4 /* CommentCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1214,6 +1228,12 @@
 				4679505B19CB31DB0072809F /* BaseFrame.m */,
 				4679506019CB354C0072809F /* StatusDetailCellFrame.h */,
 				4679506119CB354C0072809F /* StatusDetailCellFrame.m */,
+				4619BE8519D0444C00A7FEE4 /* Comment.h */,
+				4619BE8619D0444C00A7FEE4 /* Comment.m */,
+				4619BE8819D045BD00A7FEE4 /* BaseTextModel.h */,
+				4619BE8919D045BD00A7FEE4 /* BaseTextModel.m */,
+				4619BE9119D04C9C00A7FEE4 /* CommentCellFrame.h */,
+				4619BE9219D04C9C00A7FEE4 /* CommentCellFrame.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1861,6 +1881,7 @@
 				46DD129219C9D7F500B34F7A /* SlideNavViewController.m in Sources */,
 				46D111A119B2359A00040147 /* AFHTTPRequestOperation.m in Sources */,
 				468686B619A22B9600D5F58B /* SendWeiboViewController.m in Sources */,
+				4619BE8D19D04B2300A7FEE4 /* CommentCell.m in Sources */,
 				4689F6CF199100A80015DA41 /* UIImage+MultiFormat.m in Sources */,
 				4689F6D0199100A80015DA41 /* UIImage+WebP.m in Sources */,
 				46CEC478198FAF070084DA0E /* libWeiboSDK.a in Sources */,
@@ -1889,6 +1910,7 @@
 				4689F69B1991009F0015DA41 /* MJRefreshBaseView.m in Sources */,
 				4680A9DC199CEE2200CBF47E /* ProfileViewController.m in Sources */,
 				46D111A419B2359A00040147 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				4619BE9319D04C9C00A7FEE4 /* CommentCellFrame.m in Sources */,
 				466B923C19B4C197009B4B8C /* User.m in Sources */,
 				46CEC44E198FADC60084DA0E /* AppDelegate.m in Sources */,
 				468CF1E31992781A00BA62A4 /* Dock.m in Sources */,
@@ -1913,10 +1935,12 @@
 				46D111A319B2359A00040147 /* AFJSONRequestOperation.m in Sources */,
 				4689F6CC199100A80015DA41 /* SDWebImagePrefetcher.m in Sources */,
 				4689F6C8199100A80015DA41 /* SDWebImageDecoder.m in Sources */,
+				4619BE8A19D045BD00A7FEE4 /* BaseTextModel.m in Sources */,
 				4680A9CD199CED0500CBF47E /* NewFeatureViewController.m in Sources */,
 				4689F6C6199100A80015DA41 /* SDImageCache.m in Sources */,
 				4680AA0C199CF85300CBF47E /* UIButton+bg.m in Sources */,
 				46E0527F19B9BE280006B2BD /* StatusCellFrame.m in Sources */,
+				4619BE8719D0444C00A7FEE4 /* Comment.m in Sources */,
 				4689F6C7199100A80015DA41 /* SDWebImageCompat.m in Sources */,
 				4689F6D3199100A80015DA41 /* UIView+WebCacheOperation.m in Sources */,
 				4689F6A11991009F0015DA41 /* UIView+Extension.m in Sources */,
