@@ -61,11 +61,14 @@
 -(void)addBtns{
    
     _repostBtn = [self addBtnWithTitle:@"转发" x:0];
+    _repostBtn.tag = TitleViewBtnTypeRepost;
     _commentBtn = [self addBtnWithTitle:@"评论" x:kBtnWidth];
+    _commentBtn.tag = TitleViewBtnTypeComment;
     [self btnCilck:_commentBtn];
     
     _attiduteBtn =[self addBtnWithTitle:@"赞" x:_bg.frame.size.width - kBtnWidth];
     _attiduteBtn.userInteractionEnabled = NO;
+    _attiduteBtn.tag = TitleViewBtnTypeAttitude;
 }
 
 -(UIButton *)addBtnWithTitle:(NSString *)title x:(CGFloat)x{
@@ -133,6 +136,13 @@
         center.x = btn.center.x;
         _indicator.center = center;
     }];
+    
+    self.type = btn.tag;
+    //通知block按钮被点击
+    if (_btnClickBlock) {
+        
+        _btnClickBlock(btn.tag);
+    }
 }
 
 @end

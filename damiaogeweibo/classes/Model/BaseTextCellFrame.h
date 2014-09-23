@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Comment.h"
+#import "BaseTextModel.h"
 
-@interface CommentCellFrame : NSObject
+@interface BaseTextCellFrame : NSObject
 {
     CGFloat _cellHeight;
     
 }
 
-@property(nonatomic,strong) Comment *comment;
+@property(nonatomic,strong) BaseTextModel *baseTextModel;
 /*
  cell的高度
  */

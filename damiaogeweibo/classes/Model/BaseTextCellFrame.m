@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 Singer. All rights reserved.
 //
 
-#import "CommentCellFrame.h"
+#import "BaseTextCellFrame.h"
 #import "IconView.h"
 #import "User.h"
 
-@implementation CommentCellFrame
+@implementation BaseTextCellFrame
 
--(void)setComment:(Comment *)comment{
-    _comment = comment;
+-(void)setBaseTextModel:(BaseTextModel *)baseTextModel{
+     _baseTextModel = baseTextModel;
     
     //一个cell的宽度
     CGFloat cellWidth = [UIScreen mainScreen].bounds.size.width - 2*kTableBorderWidth;
@@ -29,7 +29,7 @@
     // 2.昵称
     CGFloat screenNameX = CGRectGetMaxX(_icon) + kCellBorderWidth;
     CGFloat screenNameY = iconY;
-    CGSize screenNameSize = [comment.user.screenName sizeWithFont:kScreenNameFont];
+    CGSize screenNameSize = [baseTextModel.user.screenName sizeWithFont:kScreenNameFont];
     _screenName = (CGRect){ {screenNameX, screenNameY}, screenNameSize};
     
     // 3.会员图标
@@ -43,7 +43,7 @@
     CGFloat contentX = screenNameX;
     CGFloat contentY = CGRectGetMaxY(_screenName) + kCellBorderWidth;
     CGFloat contentMaxWdith= cellWidth - 2 * kCellBorderWidth - screenNameSize.width;
-    CGSize contentSize = [comment.text sizeWithFont:kContentFont constrainedToSize:CGSizeMake(contentMaxWdith, MAXFLOAT)];
+    CGSize contentSize = [baseTextModel.text sizeWithFont:kContentFont constrainedToSize:CGSizeMake(contentMaxWdith, MAXFLOAT)];
     _content = (CGRect){ {contentX, contentY}, contentSize};
 
     //5. 时间

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommentCellFrame.h"
-@interface CommentCell : UITableViewCell
-@property (strong, nonatomic) CommentCellFrame* commentCellFrame;
+#import "BaseTextCellFrame.h"
+@interface BaseTextCell : UITableViewCell
+@property (strong, nonatomic) BaseTextCellFrame* baseTextCellFrame;
 
 @property(nonatomic,weak) UITableView *myTableView;
 @property (strong, nonatomic) NSIndexPath *indexPaath;

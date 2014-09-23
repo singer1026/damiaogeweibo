@@ -8,6 +8,7 @@
 #define kStatusesPath @"statuses/home_timeline.json"
 #define kStatusPath @"statuses/show.json"
 #define kCommentsPath @"comments/show.json"
+#define kRepostsPath @"statuses/repost_timeline.json"
 
 #import "StatusTool.h"
 #import "AccountTool.h"
@@ -75,7 +76,7 @@
     [op start];
 }
 
-+(void)commentsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *))success fail:(void (^)())fail{
++(void)commentsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *,int,NSString *))success fail:(void (^)())fail{
     sinceId = sinceId==nil?@"0":sinceId;
     maxId = maxId==nil?@"0":maxId;
     
@@ -96,7 +97,41 @@
                 [comments addObject:comment];
             }
             
-            success(comments);
+            success(comments,[JSON[@"total_number"]intValue],[JSON[@"next_cursor"] description]);
+        } 
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        if (fail) {
+            fail();
+        }
+    }];
+    
+    [op start];
+}
+
+
++(void)repostsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *, int, NSString *))success fail:(void (^)())fail{
+    sinceId = sinceId==nil?@"0":sinceId;
+    maxId = maxId==nil?@"0":maxId;
+    
+    
+    // 创建一个请求对象
+    NSURLRequest *request = [NSURLRequest
+                             requestWithPath:kRepostsPath
+                             params:@{ @"since_id" : sinceId, @"max_id" : maxId ,@"id" : idstr}];
+    
+    AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        if (success) {
+            // 1.取出所有的微博数据
+            NSArray *repostArray = JSON[@"reposts"];
+            NSMutableArray *reposts = [NSMutableArray array];
+            for (NSDictionary *dict in repostArray) {
+                Status *status = [[Status alloc]initWithDict:dict];
+                [reposts addObject:status];
+            }
+            
+            success(reposts,[JSON[@"total_number"]intValue],[JSON[@"next_cursor"] description]);
         }
         
         

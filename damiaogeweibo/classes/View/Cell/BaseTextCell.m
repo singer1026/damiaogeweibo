@@ -6,12 +6,12 @@
 //  Copyright (c) 2014年 Singer. All rights reserved.
 //
 
-#import "CommentCell.h"
+#import "BaseTextCell.h"
 #import "IconView.h"
-#import "Comment.h"
+#import "BaseTextModel.h"
 #import "User.h"
 
-@interface CommentCell()
+@interface BaseTextCell()
 {
 
     // 1.头像
@@ -39,7 +39,7 @@
 @end
 
 
-@implementation CommentCell
+@implementation BaseTextCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -114,20 +114,20 @@
     [self.contentView addSubview:_content];
 }
 
--(void)setCommentCellFrame:(CommentCellFrame *)commentCellFrame{
+-(void)setBaseTextCellFrame:(BaseTextCellFrame *)baseTextCellFrame{
     
-    _commentCellFrame = commentCellFrame;
-    Comment *comment = commentCellFrame.comment;
+    _baseTextCellFrame = baseTextCellFrame;
+    BaseTextModel *baseTextModel = baseTextCellFrame.baseTextModel;
     
     // 1.头像
-    _icon.frame = _commentCellFrame.icon;
-    _icon.user = comment.user;
+    _icon.frame = baseTextCellFrame.icon;
+    _icon.user = baseTextModel.user;
     
     // 2.昵称
-    _screenName.frame = _commentCellFrame.screenName;
-    _screenName.text = comment.user.screenName;
+    _screenName.frame = baseTextCellFrame.screenName;
+    _screenName.text = baseTextModel.user.screenName;
     
-    if (comment.user.mbtype == MBTypeNone) {
+    if (baseTextModel.user.mbtype == MBTypeNone) {
         // 隐藏会员皇冠
         _mbIcon.hidden = YES;
         _screenName.textColor = kScreenNameColor;
@@ -138,16 +138,16 @@
     }
     
     // 3.会员皇冠图标
-    _mbIcon.frame = _commentCellFrame.mbIcon;
+    _mbIcon.frame = baseTextCellFrame.mbIcon;
     
     
     // 4.时间
-    _time.frame = commentCellFrame.time;
-    _time.text = comment.createdAt;
+    _time.frame = baseTextCellFrame.time;
+    _time.text = baseTextModel.createdAt;
     
     // 5.正文
-    _content.frame = _commentCellFrame.content;
-    _content.text = comment.text;
+    _content.frame = baseTextCellFrame.content;
+    _content.text = baseTextModel.text;
 }
 
 -(void)setFrame:(CGRect)frame{

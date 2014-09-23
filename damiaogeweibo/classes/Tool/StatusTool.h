@@ -38,5 +38,17 @@
  *  @param sinceId
  *  @param maxId
  */
-+(void)commentsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *comments))success fail:(void (^)())fail;
++(void)commentsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *comments,int totleNum,NSString *nextCursor))success fail:(void (^)())fail;
+
+
+/**
+ *  加载转发列表
+ *
+ *  @param idstr
+ *  @param sinceId
+ *  @param maxId
+ *  @param success
+ *  @param fail    
+ */
++(void)repostsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *comments,int totleNum,NSString *nextCursor))success fail:(void (^)())fail;
 @end
