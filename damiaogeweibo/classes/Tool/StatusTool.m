@@ -9,6 +9,7 @@
 #define kStatusPath @"statuses/show.json"
 #define kCommentsPath @"comments/show.json"
 #define kRepostsPath @"statuses/repost_timeline.json"
+#define kAtStatusesPath @"statuses/mentions.json"
 
 #import "StatusTool.h"
 #import "AccountTool.h"
@@ -17,17 +18,16 @@
 #import "Comment.h"
 @implementation StatusTool
 
-
-+ (void)statusesWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *statuses))success fail:(void (^)())fail
++(void)sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *statuses))success fail:(void (^)())fail path:(NSString *)path
 {
     sinceId = sinceId==nil?@"0":sinceId;
     maxId = maxId==nil?@"0":maxId;
     
     // 创建一个请求对象
     NSURLRequest *request = [NSURLRequest
-                             requestWithPath:kStatusesPath
+                             requestWithPath:path
                              params:@{ @"since_id" : sinceId, @"max_id" : maxId }];
-
+    
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         // 回调
@@ -52,6 +52,13 @@
     }];
     
     [op start];
+}
+
+
++ (void)statusesWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *statuses))success fail:(void (^)())fail
+{
+    [self sinceId:sinceId maxId:maxId success:success fail:fail path:kStatusesPath];
+
 }
 
 +(void)statusWithId:(NSString*)idstr success:(void (^)(Status *))success fail:(void (^)())fail{
@@ -142,5 +149,10 @@
     }];
     
     [op start];
+}
+
+
++(void)atUserStatusesWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *))success fail:(void (^)())fail{
+    [self sinceId:sinceId maxId:maxId success:success fail:fail path:kAtStatusesPath];
 }
 @end

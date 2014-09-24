@@ -7,9 +7,18 @@
 //
 
 #import "MessageViewController.h"
+#import "StatusTool.h"
+#import "Status.h"
+#import "MJRefresh.h"
+#import "StatusCellFrame.h"
+#import "StatusDetailViewController.h"
+#import "StatusCell.h"
 
 @interface MessageViewController ()
-
+{
+    // 所有的cellFrame数据
+    NSMutableArray *_statusCellFrames;
+}
 @end
 
 @implementation MessageViewController
@@ -17,88 +26,132 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"消息";
+    self.title = @"我的微博";
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"发私信" style:UIBarButtonItemStyleBordered target:self action:@selector(sendPrivateMessage)];
+    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setBackgroundColor:kGlobalBg];
+    
+    
+//    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+
+    
+    
+    [StatusTool atUserStatusesWithSinceId:nil maxId:nil success:^(NSMutableArray *statuses) {
+        NSMutableArray *newFrames = [NSMutableArray array];
+        for (Status *s in statuses) {
+            StatusCellFrame *cellFrame = [[StatusCellFrame alloc] init];
+            cellFrame.status = s;
+            [newFrames addObject:cellFrame];
+        }
+        
+        _statusCellFrames = newFrames;
+        
+        [self.tableView headerEndRefreshing];
+        [self.tableView footerEndRefreshing];
+        [self.tableView reloadData];
+    } fail:^{
+        [self.tableView headerEndRefreshing];
+        [self.tableView footerEndRefreshing];
+    }];
 }
 
 -(void)sendPrivateMessage{
     
 }
 
-#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+-(void)footerRereshing{
+    if (_statusCellFrames.count) {
+        StatusCellFrame *lastCellFrame = [_statusCellFrames lastObject];
+        Status *lastStatus = lastCellFrame.status;
+        NSString *maxId = lastStatus.idstr;
+        long long lastMaxid = [maxId longLongValue];
+        lastMaxid--;
+        [self loadStatusDataWithSinceId:nil maxId:[NSString stringWithFormat:@"%lld",lastMaxid]];
+    }
 }
+
+-(void) loadStatusDataWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId {
+    
+    [StatusTool statusesWithSinceId:sinceId maxId:maxId success:^(NSMutableArray *statuses) {
+        NSMutableArray *newFrames = [NSMutableArray array];
+        for (Status *s in statuses) {
+            StatusCellFrame *cellFrame = [[StatusCellFrame alloc] init];
+            cellFrame.status = s;
+            [newFrames addObject:cellFrame];
+        }
+        
+        if (sinceId == nil && maxId == nil) {
+            //第一次进入加载数据
+            _statusCellFrames = newFrames;
+            //显示刷新了多少条微博
+            //[self showNewStatusCount:statuses.count];
+        }else if(maxId != nil && sinceId == nil){
+            //上拉加载更多
+            if (newFrames.count>0) {
+                [_statusCellFrames addObjectsFromArray:newFrames];
+            }
+            
+        }else if(sinceId != nil && maxId== nil){
+            //下拉刷新
+            //显示刷新了多少条微博
+           // [self showNewStatusCount:statuses.count];
+            
+            
+            // 1.将旧数据添加到新数据的最后面
+            [newFrames addObjectsFromArray:_statusCellFrames];
+            _statusCellFrames = newFrames;
+            
+        }
+        
+        [self.tableView headerEndRefreshing];
+        [self.tableView footerEndRefreshing];
+        [self.tableView reloadData];
+    } fail:^{
+        [self.tableView headerEndRefreshing];
+        [self.tableView footerEndRefreshing];
+    }];
+}
+
+#pragma mark - Table view data source
+#pragma mark 选择微博跳到微博详情页面
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    StatusDetailViewController *detail = [[StatusDetailViewController alloc] init];
+    StatusCellFrame *scf = _statusCellFrames[indexPath.row];
+    detail.status =scf.status;
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    
+    return _statusCellFrames.count;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+#pragma mark 每当有一个cell进入屏幕视野范围内就会被调用 返回当前这行显示的cell
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"Cell";
     
-    // Configure the cell...
+    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+        cell.backgroundColor = kGlobalBg;
+    }
     
+    cell.baseFrame = _statusCellFrames[indexPath.row];
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    // 在这里取出微博数据，计算cell中所有子控件的frame和cell的高度
+    StatusCellFrame *frame =_statusCellFrames[indexPath.row];
+    return frame.cellHeight;
+    
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

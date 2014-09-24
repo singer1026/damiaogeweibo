@@ -159,8 +159,6 @@
         lastMaxid--;
         [self loadStatusDataWithSinceId:nil maxId:[NSString stringWithFormat:@"%lld",lastMaxid]];
     }
-    
-    
 }
 
 

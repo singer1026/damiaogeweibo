@@ -264,6 +264,8 @@
         if (status.retweetedStatus.picUrls.count) {
             _retweetImage.hidden = NO;
             _retweetImage.imageUrls = status.retweetedStatus.picUrls;
+        }else{
+            _retweetImage.hidden = YES;
         }
         
     }else{

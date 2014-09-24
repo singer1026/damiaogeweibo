@@ -79,12 +79,11 @@
          } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
             MyLog(@"获取用户信息失败");
             
-            
         }];
         [operation start];
         
     }else{
-        NSLog(@"登录失败");
+        MyLog(@"登录失败");
     }
     
 }

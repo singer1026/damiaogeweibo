@@ -51,4 +51,7 @@
  *  @param fail    
  */
 +(void)repostsWithId:(NSString *)idstr sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *comments,int totleNum,NSString *nextCursor))success fail:(void (^)())fail;
+
+
++(void)atUserStatusesWithSinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(NSMutableArray *statuses))success fail:(void (^)())fail;
 @end

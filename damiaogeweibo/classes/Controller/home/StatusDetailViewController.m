@@ -50,30 +50,88 @@
     
     [self createSubviews];
     
-    [self loadNewStatusData];
+    [self loadAllNewData];
     
-    [self loadNewCommentsData];
     [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     [_tableView addFooterWithTarget:self action:@selector(footerRereshing)];
     
 }
 
+
+-(NSMutableArray *) currentFrames{
+    if(_titileView.type == TitleViewBtnTypeComment){
+        return _commentCellFrames;
+    }else if(_titileView.type == TitleViewBtnTypeRepost){
+        return _repostCellFrames;
+    }
+    return nil;
+}
+
+-(NSString *)maxId{
+    NSString *maxId = nil;
+    if ([self currentFrames].count) {
+        BaseTextCellFrame *cf = [[self currentFrames] lastObject];
+        long long lastll = [cf.baseTextModel.idstr longLongValue];
+        lastll--;
+        maxId = [NSString stringWithFormat:@"%lld",lastll];
+    }
+    return maxId;
+}
+
+-(NSString *)sinceId{
+    NSString *sinceId = nil;
+    if ([self currentFrames].count) {
+        BaseTextCellFrame *cf = [self currentFrames][0];
+        sinceId = cf.baseTextModel.idstr;
+    }
+    return sinceId;
+}
+
+
 -(void) headerRereshing{
+
+    [self loadAllNewData];
+}
+
+-(void)footerRereshing{
+
+    [self loadAllMoreData];
+    
+}
+
+-(NSMutableArray *)framesWithData:(NSArray *)data{
+    NSMutableArray *newFrames = [NSMutableArray array];
+    for (BaseTextModel *c in data) {
+        BaseTextCellFrame *f = [[BaseTextCellFrame alloc]init];
+        f.baseTextModel = c;
+        [newFrames addObject:f];
+    }
+    return newFrames;
+}
+
+
+#pragma mark 刷新所有数据
+-(void)loadAllNewData{
+    [self loadNewStatusData];
+    
     if (_titileView.type == TitleViewBtnTypeComment) {
         [self loadNewCommentsData];
-    }else if(_titileView.type == TitleViewBtnTypeRepost){
+    }else if (_titileView.type == TitleViewBtnTypeRepost){
         [self loadNewRepostsData];
     }
 }
 
--(void)footerRereshing{
+#pragma mark 加载更多数据
+-(void)loadAllMoreData{
+    [self loadNewStatusData];
+    
     if (_titileView.type == TitleViewBtnTypeComment) {
         [self loadMoreComments];
-    }else if(_titileView.type == TitleViewBtnTypeRepost){
+    }else if (_titileView.type == TitleViewBtnTypeRepost){
         [self loadMoreReposts];
     }
-    
 }
+
 
 #pragma mark 加载最新的微博数据
 -(void)loadNewStatusData{
@@ -96,23 +154,14 @@
 #pragma mark 加载最新的评论列表数据
 -(void)loadNewCommentsData{
     
-    NSString *sinceId = nil;
-    if (_commentCellFrames.count) {
-        BaseTextCellFrame *cf = _commentCellFrames[0];
-        sinceId = cf.baseTextModel.idstr;
-    }
+    NSString *sinceId = [self sinceId];
     
     [StatusTool commentsWithId:_status.idstr sinceId:sinceId maxId:nil success:^(NSMutableArray *comments,int totalNum,NSString *nextCursor) {
         if (_commentCellFrames == nil) {
             _commentCellFrames = [NSMutableArray array];
         }
         //计算最新的评论数据的Frame
-        NSMutableArray *newFrames = [NSMutableArray array];
-        for (BaseTextModel *c in comments) {
-            BaseTextCellFrame *f = [[BaseTextCellFrame alloc]init];
-            f.baseTextModel = c;
-            [newFrames addObject:f];
-        }
+        NSMutableArray *newFrames = [self framesWithData:comments];
         
         //先将就数据添加到新数据的后面
         [newFrames addObjectsFromArray:_commentCellFrames];
@@ -139,24 +188,12 @@
 #pragma mark 上拉加载更多评论
 -(void) loadMoreComments{
     
-    NSString *maxId = nil;
-    if (_commentCellFrames.count) {
-        BaseTextCellFrame *cf = [_commentCellFrames lastObject];
-        long long lastll = [cf.baseTextModel.idstr longLongValue];
-        lastll--;
-        maxId = [NSString stringWithFormat:@"%lld",lastll];
-    }
+    NSString *maxId = [self maxId];
     
     [StatusTool commentsWithId:_status.idstr sinceId:nil maxId:maxId success:^(NSMutableArray *comments,int totalNum,NSString *nextCursor) {
         
         //计算最新的评论数据的Frame
-        NSMutableArray *newFrames = [NSMutableArray array];
-        for (BaseTextModel *c in comments) {
-            BaseTextCellFrame *f = [[BaseTextCellFrame alloc]init];
-            f.baseTextModel = c;
-            [newFrames addObject:f];
-        }
-        
+        NSMutableArray *newFrames = [self framesWithData:comments];
         [_commentCellFrames addObjectsFromArray:newFrames];
         [_tableView footerEndRefreshing];
         //更新微博评论数
@@ -174,23 +211,14 @@
 }
 
 -(void)loadNewRepostsData{
-    NSString *sinceId = nil;
-    if (_repostCellFrames.count) {
-        BaseTextCellFrame *cf = _repostCellFrames[0];
-        sinceId = cf.baseTextModel.idstr;
-    }
+    NSString *sinceId = [self sinceId];
     
     [StatusTool repostsWithId:_status.idstr sinceId:sinceId maxId:nil success:^(NSMutableArray *reposts,int totalNum,NSString *nextCursor) {
         if (_repostCellFrames == nil) {
             _repostCellFrames = [NSMutableArray array];
         }
         //计算最新的评论数据的Frame
-        NSMutableArray *newFrames = [NSMutableArray array];
-        for (BaseTextModel *c in reposts) {
-            BaseTextCellFrame *f = [[BaseTextCellFrame alloc]init];
-            f.baseTextModel = c;
-            [newFrames addObject:f];
-        }
+        NSMutableArray *newFrames = [self framesWithData:reposts];
         
         //先将就数据添加到新数据的后面
         [newFrames addObjectsFromArray:_repostCellFrames];
@@ -216,23 +244,12 @@
 #pragma mark 上拉加载更多转发
 -(void) loadMoreReposts{
     
-    NSString *maxId = nil;
-    if (_repostCellFrames.count) {
-        BaseTextCellFrame *cf = [_repostCellFrames lastObject];
-        long long lastll = [cf.baseTextModel.idstr longLongValue];
-        lastll--;
-        maxId = [NSString stringWithFormat:@"%lld",lastll];
-    }
+    NSString *maxId = [self maxId];
     
     [StatusTool repostsWithId:_status.idstr sinceId:nil maxId:maxId success:^(NSMutableArray *reposts,int totalNum,NSString *nextCursor) {
         
         //计算最新的评论数据的Frame
-        NSMutableArray *newFrames = [NSMutableArray array];
-        for (BaseTextModel *c in reposts) {
-            BaseTextCellFrame *f = [[BaseTextCellFrame alloc]init];
-            f.baseTextModel = c;
-            [newFrames addObject:f];
-        }
+        NSMutableArray *newFrames = [self framesWithData:reposts];
         
         [_repostCellFrames addObjectsFromArray:newFrames];
         [_tableView footerEndRefreshing];
@@ -309,12 +326,7 @@
         }
         
          //覆盖数据
-        BaseTextCellFrame *cf = nil;
-        if (_titileView.type == TitleViewBtnTypeComment) {
-            cf = _commentCellFrames[indexPath.row];
-        }else if(_titileView.type == TitleViewBtnTypeRepost){
-            cf = _repostCellFrames[indexPath.row];
-        }
+        BaseTextCellFrame *cf = [self currentFrames][indexPath.row];
         cell.baseTextCellFrame = cf;
         cell.indexPaath = indexPath;
         return cell;
@@ -334,15 +346,8 @@
             _titileView.status = self.status;
            
             _titileView.btnClickBlock = ^(TitleViewBtnType type){
-                if (type == TitleViewBtnTypeRepost) {
-                    //点击转发
-                    [detail loadNewRepostsData];
-                    
-                  }else if (type == TitleViewBtnTypeComment){
-                    //点击评论
-                    [detail loadNewCommentsData];
-                    
-                }
+                
+                [detail loadAllNewData];
                 [detail->_tableView reloadData];
             };
         }
@@ -366,12 +371,7 @@
     if (indexPath.section == 0) {
         return _statusDetailCellFrame.cellHeight;
     }else{
-        BaseTextCellFrame *cf =nil;
-        if (_titileView.type == TitleViewBtnTypeComment) {
-            cf =_commentCellFrames[indexPath.row];
-        }else if(_titileView.type == TitleViewBtnTypeRepost){
-            cf =_repostCellFrames[indexPath.row];
-        }
+        BaseTextCellFrame *cf = [self currentFrames][indexPath.row];
         
         return cf.cellHeight;
     }
@@ -379,19 +379,19 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section==0) {
+
+    if (section == 0) {
         return 1;
-    }else if(_titileView.type == TitleViewBtnTypeComment){
-        return _commentCellFrames.count;
-    }else if(_titileView.type == TitleViewBtnTypeRepost){
-        return _repostCellFrames.count;
+    }else{
+        return [self currentFrames].count;
     }
+    
     return 0;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    //判断上拉下载是否需要显示
+    //判断上拉加载更多是否需要显示
     if (_titileView.type == TitleViewBtnTypeComment) {
         _tableView.footerHidden = _commentLastPage;
         
