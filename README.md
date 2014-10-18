@@ -26,7 +26,7 @@
 使用了MBProgressHUD、AFNetworking、SDWebImage、MJRefresh
 ***
 
-使用方法
+使用方法<br/>
 1.在http://open.weibo.com 里面申请一个移动手机app应用
 
 2.获取到你自己应用的App Key、App Secret、Bundle ID（Apple ID暂时可以随便填写）
