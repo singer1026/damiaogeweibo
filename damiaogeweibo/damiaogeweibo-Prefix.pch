@@ -20,9 +20,6 @@
 #define kRedirectURI @"https://api.weibo.com/oauth2/default.html"
 
 
-//#define kAppKey         @"2045436852"
-//#define kRedirectURI    @"http://www.sina.com"
-
 #ifdef DEBUG
 #define MyLog(...) NSLog(__VA_ARGS__)
 #else

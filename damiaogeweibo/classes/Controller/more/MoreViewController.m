@@ -44,7 +44,7 @@
     UIButton *loginOutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [loginOutBtn setAllStateBg:@"common_button_red.png"];
     
-    if (IOS7) {
+    if (ios_version>=7.0) {
         [loginOutBtn setFrame:CGRectMake(1, 10, 318, 40)];
     }else{
          [loginOutBtn setFrame:CGRectMake(10, 10, 300, 40)];
@@ -141,16 +141,5 @@
     
     return cell;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

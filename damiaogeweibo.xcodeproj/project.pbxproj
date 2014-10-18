@@ -215,6 +215,9 @@
 		4689F6D2199100A80015DA41 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689F6C1199100A80015DA41 /* UIImageView+WebCache.m */; };
 		4689F6D3199100A80015DA41 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689F6C3199100A80015DA41 /* UIView+WebCacheOperation.m */; };
 		468CF1E31992781A00BA62A4 /* Dock.m in Sources */ = {isa = PBXBuildFile; fileRef = 468CF1E21992781A00BA62A4 /* Dock.m */; };
+		46AF11C919F26895004C80F1 /* a.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AF11C819F26895004C80F1 /* a.png */; };
+		46AF11CB19F2697F004C80F1 /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AF11CA19F2697F004C80F1 /* b.png */; };
+		46AF11CD19F26C2F004C80F1 /* c.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AF11CC19F26C2F004C80F1 /* c.png */; };
 		46BA573B19CD1EF100C79873 /* StatusRetweetOptionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BA573A19CD1EF100C79873 /* StatusRetweetOptionBar.m */; };
 		46CEC43E198FADC60084DA0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CEC43D198FADC60084DA0E /* Foundation.framework */; };
 		46CEC440198FADC60084DA0E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CEC43F198FADC60084DA0E /* CoreGraphics.framework */; };
@@ -624,6 +627,9 @@
 		468CF1E11992781A00BA62A4 /* Dock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dock.h; sourceTree = "<group>"; };
 		468CF1E21992781A00BA62A4 /* Dock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dock.m; sourceTree = "<group>"; };
 		468CF1E41992856A00BA62A4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		46AF11C819F26895004C80F1 /* a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a.png; sourceTree = "<group>"; };
+		46AF11CA19F2697F004C80F1 /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
+		46AF11CC19F26C2F004C80F1 /* c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c.png; sourceTree = "<group>"; };
 		46BA573919CD1EF100C79873 /* StatusRetweetOptionBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusRetweetOptionBar.h; sourceTree = "<group>"; };
 		46BA573A19CD1EF100C79873 /* StatusRetweetOptionBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusRetweetOptionBar.m; sourceTree = "<group>"; };
 		46CEC43A198FADC60084DA0E /* damiaogeweibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = damiaogeweibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -998,6 +1004,9 @@
 		4679506319CB3DC90072809F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				46AF11CC19F26C2F004C80F1 /* c.png */,
+				46AF11CA19F2697F004C80F1 /* b.png */,
+				46AF11C819F26895004C80F1 /* a.png */,
 				4679506419CB3DC90072809F /* 1.png */,
 			);
 			path = Screens;
@@ -1668,6 +1677,7 @@
 				46D1992C19924B5700B552FA /* tabbar_profile@2x.png in Resources */,
 				46E89BE919CD968B00585C23 /* navigationbar_button_background_disable@2x.png in Resources */,
 				466869B919B603CF00D27F52 /* avatar_grassroot@2x.png in Resources */,
+				46AF11CB19F2697F004C80F1 /* b.png in Resources */,
 				46E89BE219CD968B00585C23 /* navigationbar_back_highlighted.png in Resources */,
 				46D1991F19924B5700B552FA /* tabbar_home.png in Resources */,
 				4679503119CB18930072809F /* statusdetail_icon_empty_retweet@2x.png in Resources */,
@@ -1725,6 +1735,7 @@
 				46E89BF119CD968B00585C23 /* navigationbar_compose_highlighted@2x.png in Resources */,
 				4679503619CB18930072809F /* statusdetail_icon_highlighted.png in Resources */,
 				4636287919BF356D00C7D9D5 /* timeline_icon_comment.png in Resources */,
+				46AF11CD19F26C2F004C80F1 /* c.png in Resources */,
 				46E89BF219CD968B00585C23 /* navigationbar_more.png in Resources */,
 				4679501419CB18930072809F /* statusdetail_comment_icon_comment.png in Resources */,
 				4679501B19CB18930072809F /* statusdetail_comment_icon_member@2x.png in Resources */,
@@ -1849,6 +1860,7 @@
 				4679501C19CB18930072809F /* statusdetail_comment_icon_member_highlighted.png in Resources */,
 				466869BE19B603CF00D27F52 /* avatar_vip.png in Resources */,
 				4679503019CB18930072809F /* statusdetail_icon_empty_retweet.png in Resources */,
+				46AF11C919F26895004C80F1 /* a.png in Resources */,
 				4679501119CB18930072809F /* statusdetail_comment_background_middle@2x.png in Resources */,
 				4680AA2B199D081500CBF47E /* common_card_background.png in Resources */,
 				4636287119BF356D00C7D9D5 /* timeline_card_middlebottom_highlighted.png in Resources */,
