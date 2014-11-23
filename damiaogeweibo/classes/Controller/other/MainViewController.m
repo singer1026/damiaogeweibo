@@ -34,6 +34,7 @@ singleton_implementation(MainViewController)
 {
     [super viewDidLoad];
     
+   
     [self addDock];
     
     //创建所有的子控制器
@@ -103,11 +104,12 @@ singleton_implementation(MainViewController)
         viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithIcon:@"navigationbar_back.png" target:self actioin:@selector(back)];
         
          viewController.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithIcon:@"navigationbar_more.png" target:self actioin:@selector(home)];
-        
+        [viewController.view setBackgroundColor:kGlobalBg];
         //更改导航控制器的高度
         navigationController.view.frame = self.view.bounds;
-        [viewController.view setBackgroundColor:kGlobalBg];
         
+        
+        //从mainViewController移除
         [_dock removeFromSuperview];
         
         // 调整Dock的Y值
@@ -120,8 +122,9 @@ singleton_implementation(MainViewController)
         }
         _dock.frame = dockFrame;
         
-        // 添加dock到根控制器界面
+        //添加dock到根控制器界面
         [root.view addSubview:_dock];
+
     }
 }
 

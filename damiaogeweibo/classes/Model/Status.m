@@ -34,17 +34,21 @@
 
 - (void)setSource:(NSString *)source
 {
-    // 解析 <a href="http://app.weibo.com/t/feed/OChwC" rel="nofollow">云中小鸟</a>
+    if (![@"" isEqualToString:source]) {
+        // 解析 <a href="http://app.weibo.com/t/feed/OChwC" rel="nofollow">云中小鸟</a>
+        //NSLog(@"---%@",source);
+        NSUInteger startIndex = [source rangeOfString:@">"].location + 1;
+        
+        NSUInteger endIndex = [source rangeOfString:@"</a>"].location;
+        
+        NSUInteger len = endIndex - startIndex;
+        
+        source = [source substringWithRange:NSMakeRange(startIndex, len)];
+        
+        _source = [NSString stringWithFormat:@"来自%@", source];
+        //NSLog(@"---%@",_source);
+    }
     
-    int startIndex = [source rangeOfString:@">"].location + 1;
-    
-    int endIndex = [source rangeOfString:@"</a>"].location;
-    
-    int len = endIndex - startIndex;
-    
-    source = [source substringWithRange:NSMakeRange(startIndex, len)];
-    
-    _source = [NSString stringWithFormat:@"来自%@", source];
 }
 
 

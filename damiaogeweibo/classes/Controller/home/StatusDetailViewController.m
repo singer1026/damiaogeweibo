@@ -18,6 +18,7 @@
 #import "MJRefresh.h"
 #import "BaseTextCellFrame.h"
 #import "BaseTextCell.h"
+#import "UIButton+bg.h"
 
 @interface StatusDetailViewController ()
 {
@@ -286,10 +287,61 @@
     
     
     //评论操作条
-    UIImageView *option = [[UIImageView alloc] initWithImage:[UIImage stretchImageWithName:@"toolbar_background.png"]];
-    option.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    option.frame = CGRectMake(0, size.height-kOptionHeight, size.width, kOptionHeight);
-    [self.view addSubview:option];
+    
+    
+//    UIImageView *option = [[UIImageView alloc] initWithImage:[UIImage stretchImageWithName:@"toolbar_background.png"]];
+//    option.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+//    option.frame = CGRectMake(0, size.height-kOptionHeight, size.width, kOptionHeight);
+//    [self.view addSubview:option];
+    CGRect frame = CGRectMake(0, size.height-kOptionHeight, size.width, kOptionHeight);
+    UIView *optionView = [[UIView alloc] initWithFrame:frame];
+    optionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage stretchImageWithName:@"toolbar_background.png"]];
+    optionView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    
+//    statusdetail_icon_retweet.png
+//    statusdetail_icon_like.png
+//    statusdetail_icon_comment.png
+    CGFloat btnHeight = 40;
+    CGFloat boradWidth = 10;
+    CGFloat btnWidth = 90;
+    CGFloat boradMidWidth = (size.width-2*boradWidth - 3*btnWidth)/4;
+
+    CGFloat btnY =2;
+
+    for (int i = 0; i<3; i++) {
+        UIButton *btn = [[UIButton alloc]init];
+        CGFloat btnX = boradWidth;
+        if (i>0) {
+            btnX = btnWidth*i+boradWidth+boradMidWidth*2*i;
+        }
+        
+        CGRect frame1 = CGRectMake(btnX, btnY, btnWidth, btnHeight);
+        btn.frame = frame1;
+        [btn setAllStateBg:@"toolbar_button.png"];
+        NSString *title =@"";
+        NSString *imageName = @"";
+        if (i == 0) {
+            //转发
+            imageName = @"statusdetail_icon_retweet.png";
+            title = @"转发";
+        }else if(i==1){
+            //评论
+            imageName = @"statusdetail_icon_comment.png";
+            title = @"评论";
+        }else if(i==2){
+            //赞
+            imageName = @"statusdetail_icon_like.png";
+            title = @"赞";
+        }
+        [btn setTitle:title forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [optionView addSubview:btn];
+    }
+    
+   
+    [self.view addSubview:optionView];
+    
 }
 
 #pragma mark 每当有一个cell进入屏幕视野范围内就会被调用 返回当前这行显示的cell
